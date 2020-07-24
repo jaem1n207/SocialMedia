@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
 import { useState } from "react";
+import { css, jsx } from "@emotion/core";
 
 import UserProfile from "../components/UserProfile";
 import LoginForm from "../components/LoginForm";
@@ -19,11 +20,13 @@ const AppLayout = ({ children }) => {
       <Menu mode="horizontal">
         <Menu.Item>
           <Input.Search
+            css={css`
+              vertical-align: middle;
+              width: 200px;
+            `}
             placeholder="검색어를 입력해주세요"
-            style={{ verticalAlign: "middle" }}
             enterButton
             size="middle"
-            width="200"
           />
         </Menu.Item>
         <Menu.Item>
@@ -45,7 +48,11 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? <UserProfile /> : <LoginForm />}
+          {isLoggedIn ? (
+            <UserProfile setisLoggedIn={setisLoggedIn} />
+          ) : (
+            <LoginForm setisLoggedIn={setisLoggedIn} />
+          )}
         </Col>
         <Col xs={24} md={12}>
           {children}
