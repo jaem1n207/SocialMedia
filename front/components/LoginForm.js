@@ -2,20 +2,14 @@ import { useCallback, useState } from "react";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
 import { css, jsx } from "@emotion/core";
+import PropTypes from "prop-types";
+import useInput from "../hooks/useInput";
 
-const UserProfile = ({ setisLoggedIn }) => {
-  const [id, setid] = useState("");
-  const [password, setpassword] = useState("");
-
-  const onIdHandler = useCallback((e) => {
-    setid(e.target.value);
-  }, []);
-  const onpasswordHandler = useCallback((e) => {
-    setpassword(e.target.value);
-  }, []);
+const LoginForm = ({ setisLoggedIn }) => {
+  const [id, onIdHandler] = useInput("");
+  const [password, onpasswordHandler] = useInput("");
 
   const onSubmitForm = useCallback(() => {
-    console.log(id, password);
     setisLoggedIn(true);
   }, [id, password]);
 
@@ -62,6 +56,7 @@ const UserProfile = ({ setisLoggedIn }) => {
         <Button
           css={css`
             width: 22.5%;
+            font-size: 0.875rem;
           `}
           type="primary"
           htmlType="submit"
@@ -74,6 +69,7 @@ const UserProfile = ({ setisLoggedIn }) => {
             <Button
               css={css`
                 width: 22.5%;
+                font-size: 0.875rem;
               `}
             >
               회원가입
@@ -85,4 +81,8 @@ const UserProfile = ({ setisLoggedIn }) => {
   );
 };
 
-export default UserProfile;
+LoginForm.propTypes = {
+  setisLoggedIn: PropTypes.func.isRequired,
+};
+
+export default LoginForm;
