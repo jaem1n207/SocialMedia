@@ -5,7 +5,7 @@ import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../reducers";
+import { loginAction } from "../reducers/user";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
