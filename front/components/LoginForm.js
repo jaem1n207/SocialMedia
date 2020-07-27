@@ -1,8 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
-import { css, jsx } from "@emotion/core";
-import PropTypes from "prop-types";
+import { css } from "@emotion/core";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../reducers/user";
