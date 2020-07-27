@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Menu, Input, Row, Col } from "antd";
 import { useState } from "react";
 import { css, jsx } from "@emotion/core";
+import { useSelector } from "react-redux";
 
 import UserProfile from "../components/UserProfile";
 import LoginForm from "../components/LoginForm";
@@ -13,7 +14,7 @@ import LoginForm from "../components/LoginForm";
 */
 
 const AppLayout = ({ children }) => {
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (
     <div>
@@ -24,7 +25,7 @@ const AppLayout = ({ children }) => {
               vertical-align: middle;
               width: 200px;
             `}
-            placeholder="검색어를 입력해주세요"
+            placeholder="검색어 입력.."
             enterButton
             size="middle"
           />
@@ -48,18 +49,14 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? (
-            <UserProfile setisLoggedIn={setisLoggedIn} />
-          ) : (
-            <LoginForm setisLoggedIn={setisLoggedIn} />
-          )}
+          {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
         </Col>
         <Col xs={24} md={6}>
           <a
-            href="https://github.com/jaem1n207/"
+            href="https://github.com/jaem1n207/SocialMedia"
             target="_blank"
             rel="noreferrer noopener"
           >

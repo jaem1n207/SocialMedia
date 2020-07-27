@@ -4,13 +4,17 @@ import Link from "next/link";
 import { css, jsx } from "@emotion/core";
 import PropTypes from "prop-types";
 import useInput from "../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../reducers";
 
-const LoginForm = ({ setisLoggedIn }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, onIdHandler] = useInput("");
   const [password, onpasswordHandler] = useInput("");
 
   const onSubmitForm = useCallback(() => {
-    setisLoggedIn(true);
+    console.log(id, password);
+    dispatch(loginAction({ id, password }));
   }, [id, password]);
 
   return (
@@ -79,10 +83,6 @@ const LoginForm = ({ setisLoggedIn }) => {
       </div>
     </Form>
   );
-};
-
-LoginForm.propTypes = {
-  setisLoggedIn: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
