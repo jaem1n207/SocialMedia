@@ -1,30 +1,46 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { Form, Input, Button } from "antd";
 import { css } from "@emotion/core";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addPost } from "../reducers/post";
 
 const PostForm = () => {
-  const { imagePaths } = useSelector((state) => state.post);
-  const [text, onTextHandler] = useState("");
-  const onSubmit = useCallback(() => {}, []);
+  const dispatch = useDispatch();
 
+  const { imagePaths } = useSelector((state) => state.post);
+  const imageInput = useRef();
+
+  const [text, setText] = useState("");
+  const onTextHandler = useCallback((e) => {
+    setText(e.target.value);
+  }, []);
+
+  const onSubmit = useCallback(() => {
+    dispatch(addPost);
+    setText("");
+  }, []);
+
+  const onClickImageUpload = useCallback(() => {
+    imageInput.current.click();
+  }, [imageInput.current]);
   return (
     <Form
       css={css`
         margin: 10px 0 20px;
       `}
       encType="multipart/form-data"
-      onFinish={onsubmit}
+      onFinish={onSubmit}
     >
       <Input.TextArea
         value={text}
         onChange={onTextHandler}
-        maxLength={140}
+        maxLength={300}
         placeholder="무슨 생각을 하고 계신가요?"
+        autoSize={true}
       />
       <div>
-        <input type="file" multiple hidden />
-        <Button>이미지 업로드</Button>
+        <input type="file" multiple hidden ref={imageInput} />
+        <Button onClick={onClickImageUpload}>이미지 업로드</Button>
         <Button
           type="primary"
           css={css`
