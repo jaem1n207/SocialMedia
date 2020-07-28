@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Card, Button, Avatar, Popover } from "antd";
+import { Card, Button, Avatar, Popover, List, Comment } from "antd";
 import {
   RetweetOutlined,
   HeartOutlined,
@@ -23,6 +23,12 @@ const PostCard = ({ post }) => {
 
   const { me } = useSelector((state) => state.user);
   const id = me?.id; // optional chaining
+
+  /* 천단위마다 콤마를 찍어준다. */
+  const numberComma = useCallback((number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }, []);
+  const commentsLength = numberComma(post.Comments.length);
 
   return (
     <div
@@ -69,9 +75,26 @@ const PostCard = ({ post }) => {
           description={post.content}
         />
       </Card>
-      {commentFormOpend && <div>댓글</div>}
-      {/* <CommentForm />
-      <Comments /> */}
+      {commentFormOpend && (
+        <div>
+          {" "}
+          <CommentForm />{" "}
+          <List
+            header={`댓글 ${commentsLength}개`}
+            itemLayout="horizontal"
+            dataSource={post.Comments}
+            renderItem={(item) => (
+              <li>
+                <Comment
+                  author={item.User.nickname}
+                  avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
+                  content={item.content}
+                />
+              </li>
+            )}
+          />
+        </div>
+      )}
     </div>
   );
 };
