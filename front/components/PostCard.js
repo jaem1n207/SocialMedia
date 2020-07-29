@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import PostImages from "../components/PostImages";
+import CommentForm from "../components/CommentForm";
 
 const PostCard = ({ post }) => {
   const [liked, setliked] = useState(false);
@@ -77,8 +78,7 @@ const PostCard = ({ post }) => {
       </Card>
       {commentFormOpend && (
         <div>
-          {" "}
-          <CommentForm />{" "}
+          <CommentForm post={post} />
           <List
             header={`댓글 ${commentsLength}개`}
             itemLayout="horizontal"

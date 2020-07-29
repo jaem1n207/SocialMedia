@@ -40,11 +40,19 @@ const PostForm = () => {
       />
       <div>
         <input type="file" multiple hidden ref={imageInput} />
-        <Button onClick={onClickImageUpload}>이미지 업로드</Button>
+        <Button
+          css={css`
+            bottom: -5px;
+          `}
+          onClick={onClickImageUpload}
+        >
+          이미지 업로드
+        </Button>
         <Button
           type="primary"
           css={css`
             float: right;
+            bottom: -5px;
           `}
           htmlType="submit"
         >
