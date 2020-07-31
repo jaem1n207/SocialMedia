@@ -34,6 +34,7 @@ const PostCard = ({ post }) => {
   return (
     <div
       css={css`
+        margin-top: 20px;
         margin-bottom: 20px;
       `}
     >
@@ -80,6 +81,10 @@ const PostCard = ({ post }) => {
         <div>
           <CommentForm post={post} />
           <List
+            css={css`
+              background: #ffffff;
+              padding: 0.4rem 1.5rem 1.5rem 1.5rem;
+            `}
             header={`댓글 ${commentsLength}개`}
             itemLayout="horizontal"
             dataSource={post.Comments}

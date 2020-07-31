@@ -47,11 +47,24 @@ const AppLayout = ({ children }) => {
           </Link>
         </Menu.Item>
       </Menu>
-      <Row gutter={8}>
+      <Row
+        gutter={8}
+        css={css`
+          margin-top: 30px;
+        `}
+      >
         <Col xs={24} md={6}>
           {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
-        <Col xs={24} md={12}>
+        <Col
+          xs={24}
+          md={12}
+          css={css`
+            padding-left: 7% !important;
+            padding-right: 7% !important;
+            width: 80%;
+          `}
+        >
           {children}
         </Col>
         <Col xs={24} md={6}>

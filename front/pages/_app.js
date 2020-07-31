@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import "antd/dist/antd.css";
 import Head from "next/head";
 import wrapper from "../store/configureStore";
+import globalStyles from "../styles/global";
 
 const App = ({ Component }) => {
   return (
@@ -10,6 +11,9 @@ const App = ({ Component }) => {
         <meta charSet="utf-8" />
         <title>Social Media</title>
       </Head>
+      <style jsx global>
+        {globalStyles}
+      </style>
       <Component />
     </>
   );

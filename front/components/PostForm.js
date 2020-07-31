@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Avatar } from "antd";
 import { css } from "@emotion/core";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "../reducers/post";
@@ -26,19 +26,47 @@ const PostForm = () => {
   return (
     <Form
       css={css`
-        margin: 10px 0 20px;
+        background: #ffffff;
+        margin: 0 0 20px;
+        padding: 0.75rem 1rem 0.625rem 1rem;
       `}
       encType="multipart/form-data"
       onFinish={onSubmit}
     >
-      <Input.TextArea
-        value={text}
-        onChange={onTextHandler}
-        maxLength={300}
-        placeholder="무슨 생각을 하고 계신가요?"
-        autoSize={true}
-      />
-      <div>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+        `}
+      >
+        <Avatar>JM</Avatar>
+        <Input.TextArea
+          css={css`
+            resize: none;
+            background: #f0f2f5;
+            width: 94%;
+            border-radius: 20px;
+            border: none;
+            font-weight: 600;
+            flex-grow: 1;
+            margin-left: 0.625rem;
+          `}
+          value={text}
+          onChange={onTextHandler}
+          maxLength={500}
+          placeholder="무슨 생각을 하고 계신가요?"
+          autoSize={true}
+        />
+      </div>
+
+      <div
+        css={css`
+          padding-top: 0.5rem;
+          margin-top: 0.75rem;
+          border-top: 1px solid #e4e6eb;
+        `}
+      >
         <input type="file" multiple hidden ref={imageInput} />
         <Button
           css={css`
