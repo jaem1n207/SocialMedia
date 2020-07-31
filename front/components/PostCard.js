@@ -36,10 +36,10 @@ const PostCard = ({ post }) => {
       css={css`
         margin-top: 20px;
         margin-bottom: 20px;
+        box-shadow: 4px 4px 8px #e2e4e7;
       `}
     >
       <Card
-        cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
             <HeartTwoTone
@@ -70,6 +70,7 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
+        cover={post.Images[0] && <PostImages images={post.Images} />}
       >
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}

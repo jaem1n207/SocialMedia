@@ -16,7 +16,7 @@ const CommentForm = ({ post }) => {
     <Form
       onFinish={onSubmitComment}
       css={css`
-        padding: 0.4rem 1.5rem 1.5rem 1.5rem;
+        padding: 1.2rem 1.5rem 1.5rem 1.5rem;
         background: #ffffff;
         border-bottom: 1px solid #f0f2f5;
       `}
@@ -32,11 +32,17 @@ const CommentForm = ({ post }) => {
             display: flex;
             flex-direction: row;
             width: 100%;
+            align-items: center;
+            position: relative;
+            flex-shrink: 1;
           `}
         >
           <Avatar>JM</Avatar>
           <Input.TextArea
             css={css`
+              display: flex;
+              flex-grow: 1;
+              outline: 0;
               background: #f0f2f5;
               resize: none;
               border-radius: 20px;
@@ -52,29 +58,30 @@ const CommentForm = ({ post }) => {
             autoSize={true}
             rows={4}
           />
+          <Button
+            css={css`
+              /* All Device */
+              position: relative;
+              cursor: pointer;
+              /* Mobile Device */
+              left: 2%;
+              /* Tablet Device */
+              @media all and (min-width: 768px) and (max-width: 1024px) {
+                left: 2%;
+              }
+              /* Desktop Device */
+              @media all and (min-width: 1025px) {
+                left: 2%;
+                text-align: center;
+                text-overflow: ellipsis;
+              }
+            `}
+            type="primary"
+            htmlType="submit"
+          >
+            작성
+          </Button>
         </div>
-
-        <Button
-          css={css`
-            /* All Device */
-            position: relative;
-            bottom: -0.3rem;
-            /* Mobile Device */
-            left: 87%;
-            /* Tablet Device */
-            @media all and (min-width: 768px) and (max-width: 1024px) {
-              left: 78%;
-            }
-            /* Desktop Device */
-            @media all and (min-width: 1025px) {
-              left: 90%;
-            }
-          `}
-          type="primary"
-          htmlType="submit"
-        >
-          작성
-        </Button>
       </Form.Item>
     </Form>
   );
