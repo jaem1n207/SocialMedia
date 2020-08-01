@@ -3,10 +3,15 @@ import PropTypes from "prop-types";
 import { css } from "@emotion/core";
 import { PlusOutlined } from "@ant-design/icons";
 
+import ImageZoom from "./ImagesZoom";
+
 const PostImages = ({ images }) => {
   const [showImagesZoom, setshowImagesZoom] = useState(false);
   const onZoom = useCallback(() => {
     setshowImagesZoom(true);
+  }, []);
+  const onClose = useCallback(() => {
+    setshowImagesZoom(false);
   }, []);
 
   if (images.length === 1) {
@@ -18,6 +23,7 @@ const PostImages = ({ images }) => {
           alt={images[0].src}
           onClick={onZoom}
         />
+        {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
       </>
     );
   }
@@ -50,6 +56,7 @@ const PostImages = ({ images }) => {
           alt={images[1].src}
           onClick={onZoom}
         />
+        {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
       </div>
     );
   }
@@ -80,6 +87,7 @@ const PostImages = ({ images }) => {
         {images.length - 1}
         개의 사진 더보기
       </div>
+      {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Menu, Input, Row, Col } from "antd";
 import { useState } from "react";
 import { css, jsx } from "@emotion/core";
 import { useSelector } from "react-redux";
+import { UserOutlined, UserAddOutlined, HomeFilled } from "@ant-design/icons";
 
 import UserProfile from "../components/UserProfile";
 import LoginForm from "../components/LoginForm";
@@ -18,8 +19,23 @@ const AppLayout = ({ children }) => {
 
   return (
     <div>
-      <Menu mode="horizontal">
-        <Menu.Item>
+      <Menu
+        mode="horizontal"
+        css={css`
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+            0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+        `}
+      >
+        <Menu.Item
+          css={css`
+            position: relative;
+            right: 35%;
+          `}
+        >
           <Input.Search
             css={css`
               vertical-align: middle;
@@ -30,18 +46,36 @@ const AppLayout = ({ children }) => {
             size="middle"
           />
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item
+          css={css`
+            position: relative;
+            right: 9% !important;
+          `}
+          icon={<HomeFilled />}
+        >
           <Link href="/">
             <a>피드</a>
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item
+          icon={<UserOutlined />}
+          css={css`
+            vertical-align: middle;
+            width: 200px;
+          `}
+        >
           <Link href="/profile">
             <a>내 프로필</a>
           </Link>
         </Menu.Item>
 
-        <Menu.Item>
+        <Menu.Item
+          icon={<UserAddOutlined />}
+          css={css`
+            vertical-align: middle;
+            width: 200px;
+          `}
+        >
           <Link href="/signup">
             <a>회원가입</a>
           </Link>
@@ -53,7 +87,13 @@ const AppLayout = ({ children }) => {
           margin-top: 30px;
         `}
       >
-        <Col xs={24} md={6}>
+        <Col
+          xs={24}
+          md={6}
+          css={css`
+            margin-left: 0.5%;
+          `}
+        >
           {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col
@@ -67,7 +107,7 @@ const AppLayout = ({ children }) => {
         >
           {children}
         </Col>
-        <Col xs={24} md={6}>
+        <Col xs={24} md={5}>
           <a
             href="https://github.com/jaem1n207/SocialMedia"
             target="_blank"
