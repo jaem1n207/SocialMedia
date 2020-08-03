@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { Menu, Input, Row, Col } from "antd";
+import { Menu, Input, Row, Col, Avatar } from "antd";
 import { useState } from "react";
 import { css, jsx } from "@emotion/core";
 import { useSelector } from "react-redux";
 import { UserOutlined, UserAddOutlined, HomeFilled } from "@ant-design/icons";
+import media from "css-in-js-media";
 
 import UserProfile from "../components/UserProfile";
 import LoginForm from "../components/LoginForm";
@@ -33,23 +34,43 @@ const AppLayout = ({ children }) => {
         <Menu.Item
           css={css`
             position: relative;
-            right: 35%;
+            right: 32%;
+            ${media("<=largeDesktop", ">desktop")} {
+              right: 17%;
+            }
+            ${media("<=desktop", ">tablet")} {
+              right: 12%;
+            }
+            ${media("<=tablet", ">phone")} {
+              right: 10%;
+            }
+            ${media("<=phone")} {
+              right: 9%;
+            }
           `}
         >
+          <Avatar
+            src="/static/logo.png"
+            size="large"
+            css={css`
+              width: 70px;
+              height: 60px;
+            `}
+          />
           <Input.Search
             css={css`
               vertical-align: middle;
-              width: 200px;
+              width: 240px;
             `}
             placeholder="검색어 입력.."
             enterButton
-            size="middle"
+            size="large"
           />
         </Menu.Item>
         <Menu.Item
           css={css`
             position: relative;
-            right: 5.5% !important;
+            right: 8.5% !important;
           `}
           icon={<HomeFilled />}
         >
@@ -61,7 +82,7 @@ const AppLayout = ({ children }) => {
           icon={<UserOutlined />}
           css={css`
             position: relative;
-            right: 5.5% !important;
+            right: 8.5% !important;
           `}
         >
           <Link href="/profile">
@@ -73,7 +94,7 @@ const AppLayout = ({ children }) => {
           icon={<UserAddOutlined />}
           css={css`
             position: relative;
-            right: 5.5% !important;
+            right: 8.5% !important;
           `}
         >
           <Link href="/signup">

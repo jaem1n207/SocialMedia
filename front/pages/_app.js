@@ -9,6 +9,7 @@ const App = ({ Component }) => {
     <>
       <Head>
         <meta charSet="utf-8" />
+        <link rel="logo icon" href="/static/favicon.png" />
         <title>Social Media</title>
       </Head>
       <style jsx global>

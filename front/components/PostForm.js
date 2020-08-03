@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { Form, Input, Button, Avatar } from "antd";
 import { css } from "@emotion/core";
+import media from "css-in-js-media";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "../reducers/post";
 
@@ -29,6 +30,9 @@ const PostForm = () => {
         background: #ffffff;
         margin: 0 0 20px;
         padding: 0.75rem 1rem 0.625rem 1rem;
+        ${media("<=tablet")} {
+          margin: 0.75rem 0 20px;
+        }
       `}
       encType="multipart/form-data"
       onFinish={onSubmit}
