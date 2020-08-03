@@ -49,7 +49,7 @@ const AppLayout = ({ children }) => {
         <Menu.Item
           css={css`
             position: relative;
-            right: 9% !important;
+            right: 5.5% !important;
           `}
           icon={<HomeFilled />}
         >
@@ -60,8 +60,8 @@ const AppLayout = ({ children }) => {
         <Menu.Item
           icon={<UserOutlined />}
           css={css`
-            vertical-align: middle;
-            width: 200px;
+            position: relative;
+            right: 5.5% !important;
           `}
         >
           <Link href="/profile">
@@ -72,8 +72,8 @@ const AppLayout = ({ children }) => {
         <Menu.Item
           icon={<UserAddOutlined />}
           css={css`
-            vertical-align: middle;
-            width: 200px;
+            position: relative;
+            right: 5.5% !important;
           `}
         >
           <Link href="/signup">
