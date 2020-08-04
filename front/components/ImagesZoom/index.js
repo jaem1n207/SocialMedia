@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Slick from "react-slick";
-import { css } from "@emotion/core";
+import { css, Global } from "@emotion/core";
 
 const ImagesZoom = ({ images, onClose }) => {
   const [cureentSlide, setcureentSlide] = useState(0);
@@ -64,6 +64,13 @@ const ImagesZoom = ({ images, onClose }) => {
           background: #0b0d0b;
         `}
       >
+        <Global
+          styles={css`
+            .slick-slide {
+              display: inline-block;
+            }
+          `}
+        />
         <div>
           <Slick
             initialSlide={0}
@@ -73,8 +80,21 @@ const ImagesZoom = ({ images, onClose }) => {
             slidesToScroll={1}
           >
             {images.map((image) => (
-              <div key={image.src}>
-                <img src={image.src} alt={image.src} />
+              <div
+                key={image.src}
+                css={css`
+                  padding: 2rem;
+                  text-align: center;
+                `}
+              >
+                <img
+                  src={image.src}
+                  alt={image.src}
+                  css={css`
+                    margin: 0 auto;
+                    max-height: 750px;
+                  `}
+                />
               </div>
             ))}
           </Slick>

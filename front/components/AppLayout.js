@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { Menu, Input, Row, Col, Avatar } from "antd";
 import { useState } from "react";
-import { css, jsx } from "@emotion/core";
+import { css, Global } from "@emotion/core";
 import { useSelector } from "react-redux";
 import { UserOutlined, UserAddOutlined, HomeFilled } from "@ant-design/icons";
 import media from "css-in-js-media";
@@ -20,6 +20,18 @@ const AppLayout = ({ children }) => {
 
   return (
     <div>
+      <Global
+        styles={css`
+          .ant-menu-item {
+            border-bottom-width: 2px;
+            padding-bottom: 0.4rem;
+            padding-top: 0.4rem;
+          }
+          .ant-menu {
+            height: 60px;
+          }
+        `}
+      />
       <Menu
         mode="horizontal"
         css={css`
@@ -49,14 +61,22 @@ const AppLayout = ({ children }) => {
             }
           `}
         >
-          <Avatar
+          <img
+            alt="홈페이지 로고"
+            src="/static/logo.png"
+            css={css`
+              width: 70px;
+              height: 60px;
+            `}
+          />
+          {/*  <Avatar
             src="/static/logo.png"
             size="large"
             css={css`
               width: 70px;
               height: 60px;
             `}
-          />
+          /> */}
           <Input.Search
             css={css`
               vertical-align: middle;
@@ -64,7 +84,7 @@ const AppLayout = ({ children }) => {
             `}
             placeholder="검색어 입력.."
             enterButton
-            size="large"
+            size="middle"
           />
         </Menu.Item>
         <Menu.Item
