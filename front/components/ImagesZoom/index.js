@@ -76,9 +76,9 @@ const ImagesZoom = ({ images, onClose }) => {
             }
             .slick-next {
               z-index: 99999999;
+              color: #0b0d0b;
               background: #ffffff;
-              font-size: 0.1rem;
-              color: #ffffff;
+              font-size: 1.75rem;
               background: #ffffff;
               height: 3rem;
               right: 0;
@@ -88,17 +88,21 @@ const ImagesZoom = ({ images, onClose }) => {
               display: block;
               top: 43%;
               position: absolute;
+              border: 0;
+              outline: none;
               cursor: pointer;
+              &::before {
+                content: ">";
+              }
               &:active {
-                color: #e4e6eb;
                 background: #e4e6eb;
               }
             }
             .slick-prev {
-              color: #ffffff;
+              color: #0b0d0b;
               z-index: 99999999;
               background: #ffffff;
-              font-size: 0.1rem;
+              font-size: 1.75rem;
               height: 3rem;
               margin-left: 1rem;
               left: 0;
@@ -107,9 +111,13 @@ const ImagesZoom = ({ images, onClose }) => {
               display: block;
               top: 43%;
               position: absolute;
+              outline: none;
+              border: 0;
               cursor: pointer;
+              &::before {
+                content: "<";
+              }
               &:active {
-                color: #e4e6eb;
                 background: #e4e6eb;
               }
             }
