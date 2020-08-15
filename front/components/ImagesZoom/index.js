@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Slick from "react-slick";
 import { css, Global } from "@emotion/core";
+import { CloseOutlined } from "@ant-design/icons";
 
 const ImagesZoom = ({ images, onClose }) => {
-  const [cureentSlide, setcureentSlide] = useState(0);
+  const [currentSlide, setcurrentSlide] = useState(0);
 
   return (
     <div
@@ -60,7 +61,7 @@ const ImagesZoom = ({ images, onClose }) => {
       </header>
       <div
         css={css`
-          height: calc(100% -44px);
+          height: calc(100% - 44px);
           background: #0b0d0b;
         `}
       >
@@ -98,6 +99,27 @@ const ImagesZoom = ({ images, onClose }) => {
               </div>
             ))}
           </Slick>
+          <div
+            css={css`
+              text-align: center;
+            `}
+          >
+            <div
+              css={css`
+                width: 75px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 15px;
+                background: #313131;
+                display: inline-block;
+                text-align: center;
+                color: #fff;
+                font-size: 0.9375rem;
+              `}
+            >
+              {currentSlide + 1} /{images.length}
+            </div>
+          </div>
         </div>
       </div>
     </div>
