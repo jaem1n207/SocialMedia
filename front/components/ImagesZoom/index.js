@@ -42,7 +42,8 @@ const ImagesZoom = ({ images, onClose }) => {
           css={css`
             position: absolute;
             right: 10%;
-            top: 12.5%;
+            top: 125.5%;
+            z-index: 9999999999999;
             padding: 15px;
             line-height: 14px;
             cursor: pointer;
@@ -54,6 +55,9 @@ const ImagesZoom = ({ images, onClose }) => {
             height: 50px;
             font-size: 1.5rem;
             font-weight: 400;
+            &:hover {
+              background: #d3d3d3;
+            }
           `}
         >
           X
@@ -69,6 +73,45 @@ const ImagesZoom = ({ images, onClose }) => {
           styles={css`
             .slick-slide {
               display: inline-block;
+            }
+            .slick-next {
+              z-index: 99999999;
+              background: #ffffff;
+              font-size: 0.1rem;
+              color: #ffffff;
+              background: #ffffff;
+              height: 3rem;
+              right: 0;
+              margin-right: 1rem;
+              width: 3rem;
+              border-radius: 50%;
+              display: block;
+              top: 43%;
+              position: absolute;
+              cursor: pointer;
+              &:active {
+                color: #e4e6eb;
+                background: #e4e6eb;
+              }
+            }
+            .slick-prev {
+              color: #ffffff;
+              z-index: 99999999;
+              background: #ffffff;
+              font-size: 0.1rem;
+              height: 3rem;
+              margin-left: 1rem;
+              left: 0;
+              width: 3rem;
+              border-radius: 50%;
+              display: block;
+              top: 43%;
+              position: absolute;
+              cursor: pointer;
+              &:active {
+                color: #e4e6eb;
+                background: #e4e6eb;
+              }
             }
           `}
         />
@@ -117,7 +160,7 @@ const ImagesZoom = ({ images, onClose }) => {
                 font-size: 0.9375rem;
               `}
             >
-              {currentSlide + 1} /{images.length}
+              {currentSlide + 1} / {images.length}
             </div>
           </div>
         </div>
