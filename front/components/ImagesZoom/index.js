@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Slick from "react-slick";
 import { css, Global } from "@emotion/core";
-import { CloseOutlined } from "@ant-design/icons";
 
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setcurrentSlide] = useState(0);
@@ -126,7 +125,7 @@ const ImagesZoom = ({ images, onClose }) => {
         <div>
           <Slick
             initialSlide={0}
-            afterChange={(slide) => setcurrentSlide(slide)}
+            beforeChange={(slide) => setcurrentSlide(slide)}
             infinite
             slidesToShow={1}
             slidesToScroll={1}

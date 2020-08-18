@@ -78,6 +78,7 @@ const PostImages = ({ images }) => {
           width: 50%;
           text-align: center;
           vertical-align: middle;
+          cursor: pointer;
         `}
         role="presentation"
         onClick={onZoom}
