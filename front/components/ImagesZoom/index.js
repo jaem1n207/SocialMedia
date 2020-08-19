@@ -144,6 +144,7 @@ const ImagesZoom = ({ images, onClose }) => {
                   css={css`
                     margin: 0 auto;
                     max-height: 750px;
+                    cursor: pointer;
                   `}
                 />
               </div>

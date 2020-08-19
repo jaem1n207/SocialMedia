@@ -4,7 +4,7 @@ import Link from "next/link";
 import { css } from "@emotion/core";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import { loginAction } from "../reducers/user";
+import { loginRequestAction } from "../reducers/user";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const LoginForm = () => {
 
   const onSubmitForm = useCallback(() => {
     console.log(id, password);
-    dispatch(loginAction({ id, password }));
+    dispatch(loginRequestAction({ id, password }));
   }, [id, password]);
 
   return (

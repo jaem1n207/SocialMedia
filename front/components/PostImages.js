@@ -62,7 +62,11 @@ const PostImages = ({ images }) => {
   }
 
   return (
-    <div>
+    <div
+      css={css`
+        cursor: pointer;
+      `}
+    >
       <img
         css={css`
           width: 50%;
@@ -78,7 +82,6 @@ const PostImages = ({ images }) => {
           width: 50%;
           text-align: center;
           vertical-align: middle;
-          cursor: pointer;
         `}
         role="presentation"
         onClick={onZoom}
