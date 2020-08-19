@@ -4,13 +4,13 @@ import { css } from "@emotion/core";
 import media from "css-in-js-media";
 import { useSelector, useDispatch } from "react-redux";
 import { addPost } from "../reducers/post";
+import useInput from "../hooks/useInput";
 
 const PostForm = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
 
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
-  const imageInput = useRef();
 
   const [text, onTextHandler, setText] = useInput("");
 
@@ -24,6 +24,8 @@ const PostForm = () => {
   const onSubmit = useCallback(() => {
     dispatch(addPost(text));
   }, [text]);
+
+  const imageInput = useRef();
 
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();

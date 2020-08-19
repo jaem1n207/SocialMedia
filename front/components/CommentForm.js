@@ -9,7 +9,7 @@ import { ADD_COMMENT_REQUEST } from "../reducers/post";
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
 
-  // const { me } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
   const id = useSelector((state) => state.user.me?.id);
   const { addCommentDone } = useSelector((state) => state.post);
 
