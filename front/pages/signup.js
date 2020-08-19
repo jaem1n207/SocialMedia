@@ -5,11 +5,16 @@ import { Form, Input, Tooltip, Checkbox, Button } from "antd";
 import useInput from "../hooks/useInput";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { css } from "@emotion/core";
+import { SIGN_UP_REQUEST } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const { Password } = Input;
 
 const Signup = () => {
-  const [id, onIdHandler] = useInput("");
+  const dispatch = useDispatch();
+  const { signUpLoading } = useSelector((state) => state.user);
+
+  const [email, onEmailHandler] = useInput("");
   const [nickname, onNicknameHandler] = useInput("");
   const [password, onPasswordHandler] = useInput("");
 
@@ -37,7 +42,11 @@ const Signup = () => {
     if (!term) {
       return settermError(true);
     }
-    console.log(id, nickname, password);
+    console.log(email, nickname, password);
+    dispatch({
+      type: SIGN_UP_REQUEST,
+      data: { email, password, nickname },
+    });
   }, [password, passwordCheck, term]);
 
   return (
@@ -47,9 +56,15 @@ const Signup = () => {
       </Head>
       <Form onFinish={onSubmit}>
         <div>
-          <label htmlFor="user-id">아이디</label>
+          <label htmlFor="user-email">이메일</label>
           <br />
-          <Input name="user-id" value={id} required onChange={onIdHandler} />
+          <Input
+            name="user-email"
+            type="email"
+            value={email}
+            required
+            onChange={onEmailHandler}
+          />
         </div>
         <div>
           <label htmlFor="user-nickname">
@@ -114,7 +129,7 @@ const Signup = () => {
             margin-top: 10px;
           `}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={signUpLoading}>
             가입하기
           </Button>
         </div>

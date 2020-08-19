@@ -32,6 +32,7 @@ const LoginForm = () => {
           css={css`
             width: 200px;
           `}
+          type="email"
           name="user-id"
           value={email}
           onChange={onEmailHandler}
