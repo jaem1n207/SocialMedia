@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Form, Input, Button, Avatar } from "antd";
 import { css } from "@emotion/core";
 import media from "css-in-js-media";
@@ -9,18 +9,21 @@ const PostForm = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
 
-  const { imagePaths } = useSelector((state) => state.post);
+  const { imagePaths, addPostDone } = useSelector((state) => state.post);
   const imageInput = useRef();
 
-  const [text, setText] = useState("");
-  const onTextHandler = useCallback((e) => {
-    setText(e.target.value);
-  }, []);
+  const [text, onTextHandler, setText] = useInput("");
+
+  // 게시글 작성이 완료된 후, 게시글 작성란 초기화
+  useEffect(() => {
+    if (addPostDone) {
+      setText("");
+    }
+  }, [addPostDone]);
 
   const onSubmit = useCallback(() => {
-    dispatch(addPost);
-    setText("");
-  }, []);
+    dispatch(addPost(text));
+  }, [text]);
 
   const onClickImageUpload = useCallback(() => {
     imageInput.current.click();
