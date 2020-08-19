@@ -7,6 +7,9 @@ import { css } from "@emotion/core";
 
 const CommentForm = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
+
+  const { me } = useSelector((state) => state.user);
+
   const [commentText, onCommentTextHandler] = useInput("");
   const onSubmitComment = useCallback(() => {
     console.log(post.id, commentText);
@@ -37,7 +40,7 @@ const CommentForm = ({ post }) => {
             flex-shrink: 1;
           `}
         >
-          <Avatar>JM</Avatar>
+          <Avatar>{me === null ? "Ja" : me.nickname.substr(0, 2)}</Avatar>
           <Input.TextArea
             css={css`
               display: flex;

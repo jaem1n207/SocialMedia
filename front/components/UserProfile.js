@@ -29,7 +29,15 @@ const UserProfile = () => {
         </div>,
       ]}
     >
-      <Meta avatar={<Avatar>{me.nickname}</Avatar>} title={me.nickname} />
+      <Meta
+        avatar={
+          <Avatar>
+            {me.nickname[0]}
+            {me.nickname[1]}
+          </Avatar>
+        }
+        title={me.nickname}
+      />
       <Button onClick={onLogOut} loading={isLoggingOut}>
         로그아웃
       </Button>

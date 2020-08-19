@@ -7,6 +7,7 @@ import { addPost } from "../reducers/post";
 
 const PostForm = () => {
   const dispatch = useDispatch();
+  const { me } = useSelector((state) => state.user);
 
   const { imagePaths } = useSelector((state) => state.post);
   const imageInput = useRef();
@@ -44,7 +45,10 @@ const PostForm = () => {
           width: 100%;
         `}
       >
-        <Avatar>JM</Avatar>
+        <Avatar>
+          {me.nickname[0]}
+          {me.nickname[1]}
+        </Avatar>
         <Input.TextArea
           css={css`
             resize: none;

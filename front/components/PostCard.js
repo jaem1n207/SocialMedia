@@ -74,7 +74,12 @@ const PostCard = ({ post }) => {
         cover={post.Images[0] && <PostImages images={post.Images} />}
       >
         <Card.Meta
-          avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
+          avatar={
+            <Avatar>
+              {post.User.nickname[0]}
+              {post.User.nickname[1]}
+            </Avatar>
+          }
           title={post.User.nickname}
           description={<PostCardContent postData={post.content} />}
         />
