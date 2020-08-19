@@ -1,79 +1,18 @@
-import { all, fork, take, call, put, takeEvery } from "redux-saga/effects";
-import axios from "axios";
+/*
+  fork: 비동기 함수 호출 
+  call: 동기 함수 호출
+  take: 일회용 (동기적으로 동작, while take로 사용)
+  takeEvery: 여러개의 fetchData 인스턴스를 동시에 시작되게 할 때 사용 (비동기적으로 동작)
+  takeLatest: 마지막으로 발생된 리퀘스트의 응답만 얻고 싶을 때 사용 
+  (같은 요청이 여러 번 시도가 되면 서버에서 오는 응답을 취소하는것이지, 서버로 가는 요청을 취소하는 것이 아닌게 치명적인 단점..)
+  throttle: 마지막 함수가 호출된 후 일정 시간이 지나기 전에 다시 호출되지 않도록 하는 것.
+  debounce: 연이어 호출되는 함수들 중 마지막 함수(또는 제일 처음)만 호출하도록하는 것
+*/
 
-// fork: 비동기 함수 호출, call: 동기 함수 호출
-
-function logInAPI(data) {
-  return axios.post("/api/login", data);
-}
-
-function* logIn(action) {
-  try {
-    const result = yield call(logInAPI, action.data);
-    yield put({
-      type: "LOG_IN_SUCCESS",
-      data: result.data,
-    });
-  } catch (err) {
-    yield put({
-      type: "LOG_IN_FAILURE",
-      data: err.response.data,
-    });
-  }
-}
-
-function logOutAPI() {
-  return axios.post("/api/logout");
-}
-
-function* logOut() {
-  try {
-    const result = yield call(logOutAPI);
-    yield put({
-      type: "LOG_OUT_SUCCESS",
-      data: result.data,
-    });
-  } catch (err) {
-    yield put({
-      type: "LOG_OUT_FAILURE",
-      data: err.response.data,
-    });
-  }
-}
-
-function addPostAPI(data) {
-  return axios.post("/api/post", data);
-}
-
-function* addPost(action) {
-  try {
-    const result = yield call(addPostAPI, action.data);
-    yield put({
-      type: "ADD_POST_SUCCEESS",
-      data: result.data,
-    });
-  } catch (err) {
-    yield put({
-      type: "ADD_POST_FAILURE",
-      data: err.response.data,
-    });
-  }
-}
-
-// while take: 동기적으로 동작, takeEvery: 비동기적으로 동작
-
-function* watchLogin() {
-  yield takeEvery("LOG_IN_REQUEST", logIn);
-}
-
-function* watchLogOut() {
-  yield takeEvery("LOG_OUT_REQUEST", logOut);
-}
-
-function* watchAddPost() {
-  yield takeEvery("ADD_POST_REQUEST", addPost);
-}
+import postSaga from "./post";
+import userSaga from "./user";
+import { all } from "redux-saga/effects";
 
 export default function* rootSaga() {
-  yield all([fork(watchLogin), fork(watchLogOut), fork(watchAddPost)]);
+  yield all([fork(postSaga), fork(userSaga)]);
 }
