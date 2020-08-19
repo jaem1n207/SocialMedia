@@ -8,14 +8,14 @@ import { loginRequestAction } from "../reducers/user";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { isLoggingIn } = useSelector((state) => state.user);
-  const [id, onIdHandler] = useInput("");
+  const { logInLoading } = useSelector((state) => state.user);
+  const [email, onEmailHandler] = useInput("");
   const [password, onpasswordHandler] = useInput("");
 
   const onSubmitForm = useCallback(() => {
-    console.log(id, password);
-    dispatch(loginRequestAction({ id, password }));
-  }, [id, password]);
+    console.log(email, password);
+    dispatch(loginRequestAction({ email, password }));
+  }, [email, password]);
 
   return (
     <Form
@@ -26,15 +26,15 @@ const LoginForm = () => {
       onFinish={onSubmitForm}
     >
       <div>
-        <label htmlFor="user-id">아이디</label>
+        <label htmlFor="user-id">이메일</label>
         <br />
         <Input
           css={css`
             width: 200px;
           `}
           name="user-id"
-          value={id}
-          onChange={onIdHandler}
+          value={email}
+          onChange={onEmailHandler}
           required
         />
       </div>
@@ -64,7 +64,7 @@ const LoginForm = () => {
           `}
           type="primary"
           htmlType="submit"
-          loading={isLoggingIn}
+          loading={logInLoading}
         >
           로그인
         </Button>

@@ -16,7 +16,7 @@ import LoginForm from "../components/LoginForm";
 */
 
 const AppLayout = ({ children }) => {
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const { me } = useSelector((state) => state.user);
 
   return (
     <div>
@@ -135,7 +135,7 @@ const AppLayout = ({ children }) => {
             margin-left: 0.5%;
           `}
         >
-          {isLoggedIn ? <UserProfile /> : <LoginForm />}
+          {me ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col
           xs={24}
