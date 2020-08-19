@@ -3,11 +3,12 @@ import { Form, Input, Button } from "antd";
 import Link from "next/link";
 import { css } from "@emotion/core";
 import useInput from "../hooks/useInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "../reducers/user";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const { isLoggingIn } = useSelector((state) => state.user);
   const [id, onIdHandler] = useInput("");
   const [password, onpasswordHandler] = useInput("");
 
@@ -63,7 +64,7 @@ const LoginForm = () => {
           `}
           type="primary"
           htmlType="submit"
-          loading={false}
+          loading={isLoggingIn}
         >
           로그인
         </Button>

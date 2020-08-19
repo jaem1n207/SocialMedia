@@ -8,9 +8,11 @@ function logInAPI(data) {
 function* logIn(action) {
   try {
     // const result = yield call(logInAPI, action.data);
+    console.log("saga login");
     yield delay(1000);
     yield put({
       type: "LOG_IN_SUCCESS",
+      data: action.data,
       // data: result.data,
     });
   } catch (err) {
@@ -50,5 +52,5 @@ function* watchLogOut() {
 }
 
 export default function* userSaga() {
-  yield all([fork(watChLogin), fork(watchLogOut)]);
+  yield all([fork(watchLogin), fork(watchLogOut)]);
 }
