@@ -1,3 +1,5 @@
+import shortId from 'shortid';
+
 export const initialState = {
   mainPosts: [
     {
@@ -36,8 +38,11 @@ export const initialState = {
   ],
   imagePaths: [], // 이미지 업로드 할 때, 이미지 경로들을 저장
   addPostLoading: false,
-  addPostDone: false, // 게시글 추가가 완료 여부
+  addPostDone: false, // 게시글 추가 완료 여부
   addPostError: null,
+  addCommentLoading: false,
+  addCommentDone: false, // 댓글 작성 완료 여부
+  addCommentError: null,
 };
 
 /* Create Action Function */
@@ -59,16 +64,16 @@ export const addComment = (data) => ({
   data,
 });
 
-const dummyPost = {
-  id: 2,
-  content: 'test1',
+const dummyPost = (data) => ({
+  id: shortId.generate(),
+  content: data,
   User: {
     id: 1,
     nickname: 'Jaemin',
   },
   Images: [],
   Comments: [],
-};
+});
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -82,7 +87,7 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [dummyPost(action.data), ...state.mainPosts],
         addPostLoading: false,
         addPostDone: true,
       };
