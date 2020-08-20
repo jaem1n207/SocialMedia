@@ -1,12 +1,14 @@
-import Head from "next/head";
-import { useState, useCallback } from "react";
-import AppLayout from "../components/AppLayout";
-import { Form, Input, Tooltip, Checkbox, Button } from "antd";
-import useInput from "../hooks/useInput";
-import { QuestionCircleOutlined } from "@ant-design/icons";
-import { css } from "@emotion/core";
-import { SIGN_UP_REQUEST } from "../reducers/user";
-import { useDispatch, useSelector } from "react-redux";
+/* eslint-disable comma-dangle */
+import React, { useState, useCallback } from 'react';
+import Head from 'next/head';
+
+import { Form, Input, Tooltip, Checkbox, Button } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { css } from '@emotion/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { SIGN_UP_REQUEST } from '../reducers/user';
+import useInput from '../hooks/useInput';
+import AppLayout from '../components/AppLayout';
 
 const { Password } = Input;
 
@@ -14,11 +16,11 @@ const Signup = () => {
   const dispatch = useDispatch();
   const { signUpLoading } = useSelector((state) => state.user);
 
-  const [email, onEmailHandler] = useInput("");
-  const [nickname, onNicknameHandler] = useInput("");
-  const [password, onPasswordHandler] = useInput("");
+  const [email, onEmailHandler] = useInput('');
+  const [nickname, onNicknameHandler] = useInput('');
+  const [password, onPasswordHandler] = useInput('');
 
-  const [passwordCheck, setpasswordCheck] = useState("");
+  const [passwordCheck, setpasswordCheck] = useState('');
   const [passwordError, setpasswordError] = useState(false);
   const onPasswordCheckHandler = useCallback(
     (e) => {
@@ -28,7 +30,7 @@ const Signup = () => {
     [password]
   );
 
-  const [term, setterm] = useState("");
+  const [term, setterm] = useState('');
   const [termError, settermError] = useState(false);
   const onTermHandler = useCallback((e) => {
     setterm(e.target.checked);
@@ -58,13 +60,7 @@ const Signup = () => {
         <div>
           <label htmlFor="user-email">이메일</label>
           <br />
-          <Input
-            name="user-email"
-            type="email"
-            value={email}
-            required
-            onChange={onEmailHandler}
-          />
+          <Input name="user-email" type="email" value={email} required onChange={onEmailHandler} />
         </div>
         <div>
           <label htmlFor="user-nickname">
@@ -74,32 +70,17 @@ const Signup = () => {
             </Tooltip>
           </label>
           <br />
-          <Input
-            name="user-nickname"
-            value={nickname}
-            required
-            onChange={onNicknameHandler}
-          />
+          <Input name="user-nickname" value={nickname} required onChange={onNicknameHandler} />
         </div>
         <div>
           <label htmlFor="user-password">비밀번호</label>
           <br />
-          <Password
-            name="user-password"
-            value={password}
-            required
-            onChange={onPasswordHandler}
-          />
+          <Password name="user-password" value={password} required onChange={onPasswordHandler} />
         </div>
         <div>
           <label htmlFor="user-password-check">비밀번호 확인</label>
           <br />
-          <Password
-            name="user-password-check"
-            value={passwordCheck}
-            required
-            onChange={onPasswordCheckHandler}
-          />
+          <Password name="user-password-check" value={passwordCheck} required onChange={onPasswordCheckHandler} />
           {passwordError && (
             <div
               css={css`

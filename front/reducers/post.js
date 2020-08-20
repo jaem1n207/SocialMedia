@@ -4,35 +4,32 @@ export const initialState = {
       id: 1,
       User: {
         id: 1,
-        nickname: "Jaemin",
+        nickname: 'Jaemin',
       },
-      content: "첫 번째 게시글 #처음 #처럼",
+      content: '첫 번째 게시글 #처음 #처럼',
       Images: [
         {
-          src:
-            "https://cdn.pixabay.com/photo/2016/11/18/19/01/paris-1836415_960_720.jpg",
+          src: 'https://cdn.pixabay.com/photo/2016/11/18/19/01/paris-1836415_960_720.jpg',
         },
         {
-          src:
-            "https://cdn.pixabay.com/photo/2015/12/08/00/32/london-1081820_960_720.jpg",
+          src: 'https://cdn.pixabay.com/photo/2015/12/08/00/32/london-1081820_960_720.jpg',
         },
         {
-          src:
-            "https://cdn.pixabay.com/photo/2016/05/20/20/40/london-1405911_960_720.jpg",
+          src: 'https://cdn.pixabay.com/photo/2016/05/20/20/40/london-1405911_960_720.jpg',
         },
       ],
       Comments: [
         {
           User: {
-            nickname: "고양이",
+            nickname: '고양이',
           },
-          content: "냥냥",
+          content: '냥냥',
         },
         {
           User: {
-            nickname: "강아지",
+            nickname: '강아지',
           },
-          content: "멍멍",
+          content: '멍멍',
         },
       ],
     },
@@ -44,13 +41,13 @@ export const initialState = {
 };
 
 /* Create Action Function */
-export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
-export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
-export const ADD_POST_FAILURE = "ADD_POST_FAILURE";
+export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 
-export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
-export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
-export const ADD_COMMENT_FAILURE = "ADD_COMMENT_FAILURE";
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
 export const addPost = (data) => ({
   type: ADD_POST_REQUEST,
@@ -64,10 +61,10 @@ export const addComment = (data) => ({
 
 const dummyPost = {
   id: 2,
-  content: "test1",
+  content: 'test1',
   User: {
     id: 1,
-    nickname: "Jaemin",
+    nickname: 'Jaemin',
   },
   Images: [],
   Comments: [],

@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect } from "react";
-import { Form, Input, Button, Avatar } from "antd";
-import useInput from "../hooks/useInput";
-import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
-import { css } from "@emotion/core";
-import { ADD_COMMENT_REQUEST } from "../reducers/post";
+import React, { useCallback, useEffect } from 'react';
+import { Form, Input, Button, Avatar } from 'antd';
+import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { css } from '@emotion/core';
+import useInput from '../hooks/useInput';
+import { ADD_COMMENT_REQUEST } from '../reducers/post';
 
 const CommentForm = ({ post }) => {
   const dispatch = useDispatch();
@@ -13,12 +13,12 @@ const CommentForm = ({ post }) => {
   const id = useSelector((state) => state.user.me?.id);
   const { addCommentDone } = useSelector((state) => state.post);
 
-  const [commentText, onCommentTextHandler, setCommentText] = useInput("");
+  const [commentText, onCommentTextHandler, setCommentText] = useInput('');
 
   // 댓글 작성이 완료된 후, 댓글작성란 초기화
   useEffect(() => {
     if (addCommentDone) {
-      setCommentText("");
+      setCommentText('');
     }
   }, [addCommentDone]);
 
@@ -55,7 +55,7 @@ const CommentForm = ({ post }) => {
             flex-shrink: 1;
           `}
         >
-          <Avatar>{me === null ? "Ja" : me.nickname.substr(0, 2)}</Avatar>
+          <Avatar>{me === null ? 'Ja' : me.nickname.substr(0, 2)}</Avatar>
           <Input.TextArea
             css={css`
               display: flex;
@@ -73,7 +73,7 @@ const CommentForm = ({ post }) => {
             placeholder="댓글을 입력하세요..."
             value={commentText}
             onChange={onCommentTextHandler}
-            autoSize={true}
+            autoSize
             rows={4}
           />
           <Button

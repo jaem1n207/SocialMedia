@@ -1,17 +1,13 @@
-import React, { useState, useCallback } from "react";
-import { Card, Button, Avatar, Popover, List, Comment } from "antd";
-import {
-  RetweetOutlined,
-  HeartOutlined,
-  MessageOutlined,
-  EllipsisOutlined,
-  HeartTwoTone,
-} from "@ant-design/icons";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import PostImages from "../components/PostImages";
-import CommentForm from "../components/CommentForm";
-import PostCardContent from "../components/PostCardContent";
+/* eslint-disable react/jsx-wrap-multilines */
+import React, { useState, useCallback } from 'react';
+import { Card, Button, Avatar, Popover, List, Comment } from 'antd';
+import { RetweetOutlined, HeartOutlined, MessageOutlined, EllipsisOutlined, HeartTwoTone } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
+import PostImages from './PostImages';
+import CommentForm from './CommentForm';
+import PostCardContent from './PostCardContent';
 
 const PostCard = ({ post }) => {
   const [liked, setliked] = useState(false);
@@ -27,9 +23,7 @@ const PostCard = ({ post }) => {
   const id = me?.id; // optional chaining
 
   /* 천단위마다 콤마를 찍어준다. */
-  const numberComma = useCallback((number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }, []);
+  const numberComma = useCallback((number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','), []);
   const commentsLength = numberComma(post.Comments.length);
 
   return (
@@ -43,11 +37,7 @@ const PostCard = ({ post }) => {
       <Card
         actions={[
           liked ? (
-            <HeartTwoTone
-              twoToneColor="#ed4956"
-              key="heart"
-              onClick={onToggleLike}
-            />
+            <HeartTwoTone twoToneColor="#ed4956" key="heart" onClick={onToggleLike} />
           ) : (
             <HeartOutlined key="heart" onClick={onToggleLike} />
           ),

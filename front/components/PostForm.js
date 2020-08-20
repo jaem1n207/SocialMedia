@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
-import { Form, Input, Button, Avatar } from "antd";
-import { css } from "@emotion/core";
-import media from "css-in-js-media";
-import { useSelector, useDispatch } from "react-redux";
-import { addPost } from "../reducers/post";
-import useInput from "../hooks/useInput";
+import React, { useCallback, useRef, useEffect } from 'react';
+import { Form, Input, Button, Avatar } from 'antd';
+import { css } from '@emotion/core';
+import media from 'css-in-js-media';
+import { useSelector, useDispatch } from 'react-redux';
+import { addPost } from '../reducers/post';
+import useInput from '../hooks/useInput';
 
 const PostForm = () => {
   const dispatch = useDispatch();
@@ -12,12 +12,12 @@ const PostForm = () => {
 
   const { imagePaths, addPostDone } = useSelector((state) => state.post);
 
-  const [text, onTextHandler, setText] = useInput("");
+  const [text, onTextHandler, setText] = useInput('');
 
   // 게시글 작성이 완료된 후, 게시글 작성란 초기화
   useEffect(() => {
     if (addPostDone) {
-      setText("");
+      setText('');
     }
   }, [addPostDone]);
 
@@ -36,7 +36,7 @@ const PostForm = () => {
         background: #ffffff;
         margin: 0 0 20px;
         padding: 0.75rem 1rem 0.625rem 1rem;
-        ${media("<=tablet")} {
+        ${media('<=tablet')} {
           margin: 0.75rem 0 20px;
         }
       `}
@@ -50,10 +50,7 @@ const PostForm = () => {
           width: 100%;
         `}
       >
-        <Avatar>
-          {me.nickname[0]}
-          {me.nickname[1]}
-        </Avatar>
+        <Avatar>{me.nickname.substr(0, 2)}</Avatar>
         <Input.TextArea
           css={css`
             resize: none;
@@ -69,7 +66,7 @@ const PostForm = () => {
           onChange={onTextHandler}
           maxLength={500}
           placeholder="무슨 생각을 하고 계신가요?"
-          autoSize={true}
+          autoSize
         />
       </div>
 

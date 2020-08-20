@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Slick from "react-slick";
-import { css, Global } from "@emotion/core";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Slick from 'react-slick';
+import { css, Global } from '@emotion/core';
 
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setcurrentSlide] = useState(0);
@@ -37,6 +37,7 @@ const ImagesZoom = ({ images, onClose }) => {
           상세 이미지
         </h1>
         <button
+          type="button"
           onClick={onClose}
           css={css`
             position: absolute;
@@ -91,7 +92,7 @@ const ImagesZoom = ({ images, onClose }) => {
               outline: none;
               cursor: pointer;
               &::before {
-                content: ">";
+                content: '>';
               }
               &:active {
                 background: #e4e6eb;
@@ -114,7 +115,7 @@ const ImagesZoom = ({ images, onClose }) => {
               border: 0;
               cursor: pointer;
               &::before {
-                content: "<";
+                content: '<';
               }
               &:active {
                 background: #e4e6eb;

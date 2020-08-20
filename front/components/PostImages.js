@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from "react";
-import PropTypes from "prop-types";
-import { css } from "@emotion/core";
-import { PlusOutlined } from "@ant-design/icons";
+import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
+import { PlusOutlined } from '@ant-design/icons';
 
-import ImageZoom from "./ImagesZoom";
+import ImageZoom from './ImagesZoom';
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, setshowImagesZoom] = useState(false);
@@ -17,12 +17,7 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <>
-        <img
-          role="presentation"
-          src={images[0].src}
-          alt={images[0].src}
-          onClick={onZoom}
-        />
+        <img role="presentation" src={images[0].src} alt={images[0].src} onClick={onZoom} />
         {showImagesZoom && <ImageZoom images={images} onClose={onClose} />}
       </>
     );
@@ -97,6 +92,7 @@ const PostImages = ({ images }) => {
 };
 
 PostImages.propTypes = {
+  // eslint-disable-next-line react/require-default-props
   images: PropTypes.arrayOf(PropTypes.object),
 };
 

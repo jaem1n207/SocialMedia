@@ -1,17 +1,17 @@
-import PropTypes from "prop-types";
-import Link from "next/link";
-import { Menu, Input, Row, Col, Avatar } from "antd";
-import { useState } from "react";
-import { css, Global } from "@emotion/core";
-import { useSelector } from "react-redux";
-import { UserOutlined, UserAddOutlined, HomeFilled } from "@ant-design/icons";
-import media from "css-in-js-media";
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { Menu, Input, Row, Col, Avatar } from 'antd';
+import React, { useState } from 'react';
+import { css, Global } from '@emotion/core';
+import { useSelector } from 'react-redux';
+import { UserOutlined, UserAddOutlined, HomeFilled } from '@ant-design/icons';
+import media from 'css-in-js-media';
 
-import UserProfile from "../components/UserProfile";
-import LoginForm from "../components/LoginForm";
+import UserProfile from './UserProfile';
+import LoginForm from './LoginForm';
 
-/* 
-  xs: 모바일(<576px), sm: 태블릿(>=576px), md: 작은 데스크탑(>=768px), 
+/*
+  xs: 모바일(<576px), sm: 태블릿(>=576px), md: 작은 데스크탑(>=768px),
   lg: >=992px, xl: >=1200px, xxl: >=1600px
 */
 
@@ -39,24 +39,24 @@ const AppLayout = ({ children }) => {
           display: flex;
           flex-direction: row;
           justify-content: center;
-          box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
-            0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+            0 9px 28px 8px rgba(0, 0, 0, 0.05);
         `}
       >
         <Menu.Item
           css={css`
             position: relative;
             right: 32%;
-            ${media("<=largeDesktop", ">desktop")} {
+            ${media('<=largeDesktop', '>desktop')} {
               right: 17%;
             }
-            ${media("<=desktop", ">tablet")} {
+            ${media('<=desktop', '>tablet')} {
               right: 12%;
             }
-            ${media("<=tablet", ">phone")} {
+            ${media('<=tablet', '>phone')} {
               right: 10%;
             }
-            ${media("<=phone")} {
+            ${media('<=phone')} {
               right: 9%;
             }
           `}
@@ -149,12 +149,8 @@ const AppLayout = ({ children }) => {
           {children}
         </Col>
         <Col xs={24} md={5}>
-          <a
-            href="https://github.com/jaem1n207/SocialMedia"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Jaemin's github
+          <a href="https://github.com/jaem1n207/SocialMedia" target="_blank" rel="noreferrer noopener">
+            <span>Jaemin's github</span>
           </a>
         </Col>
       </Row>

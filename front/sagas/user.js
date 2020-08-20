@@ -1,5 +1,6 @@
-import { all, fork, call, takeLatest, delay, put } from "redux-saga/effects";
-import axios from "axios";
+/* eslint-disable no-unused-vars */
+import { all, fork, call, takeLatest, delay, put } from 'redux-saga/effects';
+import axios from 'axios';
 import {
   LOG_IN_SUCCESS,
   LOG_OUT_SUCCESS,
@@ -10,16 +11,16 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-} from "../reducers/user";
+} from '../reducers/user';
 
 function logInAPI(data) {
-  return axios.post("/api/login", data);
+  return axios.post('/api/login', data);
 }
 
 function* logIn(action) {
   try {
     // const result = yield call(logInAPI, action.data);
-    console.log("saga login");
+    console.log('saga login');
     yield delay(1000);
     yield put({
       type: LOG_IN_SUCCESS,
@@ -35,7 +36,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post("/api/logout");
+  return axios.post('/api/logout');
 }
 
 function* logOut() {
@@ -55,7 +56,7 @@ function* logOut() {
 }
 
 function signUpAPI() {
-  return axios.post("/api/signUp");
+  return axios.post('/api/signUp');
 }
 
 function* signUp() {
