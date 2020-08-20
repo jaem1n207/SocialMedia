@@ -33,7 +33,6 @@
     "no-param-reassign": "off",
     "comma-dangle": "off",
     "consistent-return": "off",
-    "multiline-comment-style":"off", 
     "react/jsx-wrap-multilines": "off"
   }
 }
