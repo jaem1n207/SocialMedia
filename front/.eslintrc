@@ -30,6 +30,10 @@
     "react/jsx-one-expression-per-line": "off",
     "object-curly-newline": "off",
     "linebreak-style": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "comma-dangle": "off",
+    "consistent-return": "off",
+    "multiline-comment-style":"off", 
+    "react/jsx-wrap-multilines": "off"
   }
 }

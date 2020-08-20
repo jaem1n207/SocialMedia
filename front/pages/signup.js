@@ -1,4 +1,3 @@
-/* eslint-disable comma-dangle */
 import React, { useState, useCallback } from 'react';
 import Head from 'next/head';
 
