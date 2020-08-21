@@ -144,6 +144,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         me: {
+          ...state.me,
           Posts: [{ id: action.data }, ...state.me.Posts],
         },
       };
