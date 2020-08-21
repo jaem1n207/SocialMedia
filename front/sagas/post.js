@@ -17,7 +17,56 @@ import {
   generateDummyPost,
   LOAD_POST_FAILURE,
 } from '../reducers/post';
-import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
+import {
+  ADD_POST_TO_ME,
+  REMOVE_POST_OF_ME,
+  FOLLOW_SUCCESS,
+  FOLLOW_FAILURE,
+  UNFOLLOW_SUCCESS,
+  UNFOLLOW_FAILURE,
+  FOLLOW_REQUEST,
+  UNFOLLOW_REQUEST,
+} from '../reducers/user';
+
+function followAPI(data) {
+  return axios.get('api/posts', data);
+}
+
+function* follow(action) {
+  try {
+    // const result = yield call(followAPI);
+    yield delay(1000);
+    yield put({
+      type: FOLLOW_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: FOLLOW_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
+
+function unfollowAPI(data) {
+  return axios.get('api/posts', data);
+}
+
+function* unfollow(action) {
+  try {
+    // const result = yield call(unfollowAPI);
+    yield delay(1000);
+    yield put({
+      type: UNFOLLOW_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: UNFOLLOW_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
 
 function loadPostAPI(data) {
   return axios.get('api/posts', data);
@@ -110,6 +159,14 @@ function* addComment(action) {
   }
 }
 
+function* watchFollow() {
+  yield takeLatest(FOLLOW_REQUEST, follow);
+}
+
+function* watchUnfollow() {
+  yield takeLatest(UNFOLLOW_REQUEST, unfollow);
+}
+
 function* watchLoadPost() {
   yield takeLatest(LOAD_POST_REQUEST, loadPost);
 }
@@ -127,5 +184,12 @@ function* watchAddComment() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchLoadPost), fork(watchAddPost), fork(watchRemovePost), fork(watchAddComment)]);
+  yield all([
+    fork(watchFollow),
+    fork(watchUnfollow),
+    fork(watchLoadPost),
+    fork(watchAddPost),
+    fork(watchRemovePost),
+    fork(watchAddComment),
+  ]);
 }
