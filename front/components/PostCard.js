@@ -8,6 +8,7 @@ import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import { REMOVE_POST_REQUEST } from '../reducers/post';
+import FollowButton from './FollowButton';
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const PostCard = ({ post }) => {
       `}
     >
       <Card
+        cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
           liked ? (
             <HeartTwoTone twoToneColor="#ed4956" key="heart" onClick={onToggleLike} />
@@ -73,7 +75,7 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
-        cover={post.Images[0] && <PostImages images={post.Images} />}
+        extra={<FollowButton post={post} />}
       >
         <Card.Meta
           avatar={

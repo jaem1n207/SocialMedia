@@ -29,6 +29,7 @@
     "consistent-return": "off",
     "react/jsx-wrap-multilines": "off",
     "implicit-arrow-linebreak": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "max-len": "off"
   }
 }
