@@ -10,7 +10,7 @@ const PostForm = () => {
   const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
 
-  const { imagePaths, addPostDone } = useSelector((state) => state.post);
+  const { imagePaths, addPostDone, addPostLoading } = useSelector((state) => state.post);
 
   const [text, onTextHandler, setText] = useInput('');
 
@@ -87,6 +87,7 @@ const PostForm = () => {
           이미지 업로드
         </Button>
         <Button
+          loading={addPostLoading}
           type="primary"
           css={css`
             float: right;

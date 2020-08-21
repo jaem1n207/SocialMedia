@@ -11,7 +11,7 @@ const CommentForm = ({ post }) => {
 
   const { me } = useSelector((state) => state.user);
   const id = useSelector((state) => state.user.me?.id);
-  const { addCommentDone } = useSelector((state) => state.post);
+  const { addCommentDone, addCommentLoading } = useSelector((state) => state.post);
 
   const [commentText, onCommentTextHandler, setCommentText] = useInput('');
 
@@ -77,6 +77,7 @@ const CommentForm = ({ post }) => {
             rows={4}
           />
           <Button
+            loading={addCommentLoading}
             css={css`
               /* All Device */
               position: relative;
