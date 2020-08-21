@@ -110,17 +110,21 @@ const AppLayout = ({ children }) => {
           </Link>
         </Menu.Item>
 
-        <Menu.Item
-          icon={<UserAddOutlined />}
-          css={css`
-            position: relative;
-            right: 8.5% !important;
-          `}
-        >
-          <Link href="/signup">
-            <a>회원가입</a>
-          </Link>
-        </Menu.Item>
+        {me ? (
+          ''
+        ) : (
+          <Menu.Item
+            icon={<UserAddOutlined />}
+            css={css`
+              position: relative;
+              right: 8.5% !important;
+            `}
+          >
+            <Link href="/signup">
+              <a>회원가입</a>
+            </Link>
+          </Menu.Item>
+        )}
       </Menu>
       <Row
         gutter={8}
