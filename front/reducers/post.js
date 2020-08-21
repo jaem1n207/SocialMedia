@@ -1,5 +1,4 @@
 import shortId from 'shortid';
-import { ADD_POST_TO_ME } from './user';
 
 export const initialState = {
   mainPosts: [
@@ -48,6 +47,9 @@ export const initialState = {
   addPostLoading: false,
   addPostDone: false, // 게시글 추가 완료 여부
   addPostError: null,
+  removePostLoading: false,
+  removePostDone: false, // 게시글 삭제 완료 여부
+  removePostError: null,
   addCommentLoading: false,
   addCommentDone: false, // 댓글 작성 완료 여부
   addCommentError: null,
@@ -57,6 +59,10 @@ export const initialState = {
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+
+export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
+export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
+export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
@@ -84,7 +90,7 @@ const dummyPost = (data) => ({
 });
 
 const dummyComment = (data) => ({
-  id: shortid.generate(),
+  id: shortId.generate(),
   content: data,
   User: {
     id: 1,
@@ -114,33 +120,27 @@ const reducer = (state = initialState, action) => {
         addPostLoading: false,
         addPostError: action.error,
       };
-    case ADD_COMMENT_REQUEST:
+    case REMOVE_POST_REQUEST:
       return {
         ...state,
-        addCommentLoading: true,
-        addCommentDone: false,
-        addCommentError: null,
+        removeCommentLoading: true,
+        removeCommentDone: false,
+        removeCommentError: null,
       };
-    case ADD_COMMENT_SUCCESS: {
-      const postIndex = state.mainPosts.findIndex((item) => item.id === action.data.postId);
-      const post = { ...state.mainPosts[postIndex] };
-      post.Comments = [dummyComment(action.data.content), ...post.Comments];
-      const mainPosts = [...state.mainPosts];
-      mainPosts[postIndex] = post;
+    case REMOVE_POST_SUCCESS: {
       return {
         ...state,
-        mainPosts,
-        addCommentLoading: false,
-        addCommentDone: true,
+        mainPosts: state.mainPosts.filter((post) => post.id !== action.data),
+        removeCommentLoading: false,
+        removeCommentDone: true,
       };
     }
-    case ADD_COMMENT_FAILURE:
+    case REMOVE_POST_FAILURE:
       return {
         ...state,
-        addCommentLoading: false,
-        addCommentError: action.error,
+        removeCommentLoading: false,
+        removeCommentError: action.error,
       };
-
     default:
       return state;
   }
