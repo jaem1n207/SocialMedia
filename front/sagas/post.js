@@ -87,8 +87,8 @@ function* loadPost(action) {
   }
 }
 
-function addPostAPI(data) {
-  return axios.post('/api/post', data);
+function addPostAPI(postData) {
+  return axios.post('/api/post', postData);
 }
 
 function* addPost(action) {
