@@ -1,5 +1,3 @@
-const { DataTypes } = require('sequelize/types');
-
 module.exports = (sequelize, DataTypes) => {
   // create users table
   const User = sequelize.define(
