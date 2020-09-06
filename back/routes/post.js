@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 /* addPostAPI */
-router.post('/post', (req, res) => {
+router.post('/', (req, res) => {
   res.json({ id: 1, content: 'hello' });
 });
 
 /* removePostAPI */
-router.delete('/post', (req, res) => {
+router.delete('/', (req, res) => {
   res.json({ id: 1 });
 });
 
