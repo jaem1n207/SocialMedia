@@ -2,7 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define(
     'Image',
     {
-      src: {},
+      src: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
+      },
     },
     {
       // 한글 셋팅

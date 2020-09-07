@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     'Post',
     {
-      content: {},
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
     },
     {
       // 한글 + 이모티콘 셋팅

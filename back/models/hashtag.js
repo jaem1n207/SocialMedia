@@ -2,7 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Hashtag = sequelize.define(
     'Hashtag',
     {
-      name: {},
+      name: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+      },
     },
     {
       // 한글 + 이모티콘 셋팅
