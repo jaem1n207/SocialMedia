@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     db.Post.hasMany(db.Image);
     db.Post.belongsToMany(db.User, {
       through: 'Like',
+      as: 'Likers',
     });
   };
 
