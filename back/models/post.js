@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      // ShareId
     },
     {
       // 한글 + 이모티콘 셋팅
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       through: 'Like',
       as: 'Likers',
     });
+    db.Post.belongsTo(db.Post, { as: 'Share' });
   };
 
   return Post;
