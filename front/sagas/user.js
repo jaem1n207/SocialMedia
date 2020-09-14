@@ -56,13 +56,12 @@ function* logOut() {
 }
 
 function signUpAPI() {
-  return axios.post('/api/signUp');
+  return axios.post('/user');
 }
 
 function* signUp() {
   try {
-    // const result = yield call(signUpAPI);
-    yield delay(1000);
+    const result = yield call(signUpAPI);
     yield put({
       type: SIGN_UP_SUCCESS,
     });

@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     db.User.hasMany(db.Comment);
     db.User.belongsToMany(db.Post, {
       through: 'Like',
-      as: 'Liked',
+      as: 'Liked', // 좋아요를 누른 Post
     });
     db.User.belongsToMany(db.User, {
       through: 'Follow',
