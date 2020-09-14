@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
+
 const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
 const db = require('./models');
-const cors = require('cors');
+const passportConfig = require('./passport');
 
 const app = express();
 db.sequelize
@@ -12,10 +14,12 @@ db.sequelize
   })
   .catch(console.error);
 
+passportConfig();
+
+/* CORS Settings */
 app.use(
   cors({
     origin: '*',
-    credentials: false,
   })
 );
 app.use(express.json());

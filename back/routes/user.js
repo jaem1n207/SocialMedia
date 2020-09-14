@@ -1,10 +1,23 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
+const passport = require('passport');
 
 const router = express.Router();
 
-/* Signup */
+/* user login */
+router.post(
+  '/login',
+  passport.authenticate('local', (err, user, info) => {
+    // 서버에러
+    if (err) {
+      console.error(err);
+      next(err);
+    }
+  })
+);
+
+/* user Signup */
 router.post('/', async (req, res, next) => {
   try {
     const exUser = await User.findOne({

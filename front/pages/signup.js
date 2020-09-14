@@ -14,13 +14,20 @@ const { Password } = Input;
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const { signUpLoading, signUpDone } = useSelector((state) => state.user);
+  const { signUpLoading, signUpDone, signUpError } = useSelector((state) => state.user);
   /* 회원가입이 완료되면 메인페이지로 이동 */
   useEffect(() => {
     if (signUpDone) {
       Router.push('/');
     }
   }, [signUpDone]);
+  /* 회원가입이 실패했을 경우 */
+  useEffect(() => {
+    if (signUpError) {
+      // eslint-disable-next-line no-alert
+      alert(signUpError);
+    }
+  }, [signUpError]);
 
   const [email, onEmailHandler] = useInput('');
   const [nickname, onNicknameHandler] = useInput('');
