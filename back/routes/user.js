@@ -22,10 +22,10 @@ router.post('/', async (req, res, next) => {
       nickname: req.body.nickname,
       password: hashedPassword,
     });
-    res.send('ok');
+    res.status(201).send('ok');
   } catch (err) {
     console.error(err);
-    next(err);
+    next(err); // status 500
   }
 });
 
