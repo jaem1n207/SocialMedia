@@ -24,7 +24,7 @@ router.post('/login', (req, res, next) => {
         return next(loginErr);
       }
       // 서버, 패스포트 로그인 성공 시
-      return res.json(user);
+      return res.status(200).json(user);
     });
   })(req, res, next);
 });
