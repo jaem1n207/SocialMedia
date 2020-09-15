@@ -3,7 +3,7 @@ const local = require('./local');
 const { User } = require('../models');
 
 module.exports = () => {
-  // user id만 따로 저장.
+  // user id만 따로 서버에 저장.
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
