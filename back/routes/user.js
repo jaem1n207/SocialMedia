@@ -6,16 +6,28 @@ const passport = require('passport');
 const router = express.Router();
 
 /* user login */
-router.post(
-  '/login',
+router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
-    // 서버에러
+    // 서버 에러
     if (err) {
       console.error(err);
-      next(err);
+      return next(err);
     }
-  })
-);
+    // 클라이언트 에러가 있을시
+    if (info) {
+      return res.status(401).send(info.reason);
+    }
+    // 성공 시
+    return req.login(user, async (loginErr) => {
+      if (loginErr) {
+        console.error(loginErr);
+        return next(loginErr);
+      }
+      // 서버, 패스포트 로그인 성공 시
+      return res.json(user);
+    });
+  })(req, res, next);
+});
 
 /* user Signup */
 router.post('/', async (req, res, next) => {
