@@ -139,4 +139,4 @@ SocialMedia.pem
 SocialMedia-aws.pem
 node_modules
 .env
-.next
+config.js
