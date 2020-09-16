@@ -15,10 +15,11 @@ const { Password } = Input;
 const Signup = () => {
   const dispatch = useDispatch();
   const { signUpLoading, signUpDone, signUpError } = useSelector((state) => state.user);
+
   /* 회원가입이 완료되면 메인페이지로 이동 */
   useEffect(() => {
     if (signUpDone) {
-      Router.push('/');
+      Router.replace('/');
     }
   }, [signUpDone]);
   /* 회원가입이 실패했을 경우 */

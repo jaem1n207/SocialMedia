@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
@@ -9,9 +9,16 @@ import { loginRequestAction } from '../reducers/user';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const { logInLoading } = useSelector((state) => state.user);
+  const { logInLoading, logInError } = useSelector((state) => state.user);
   const [email, onEmailHandler] = useInput('');
   const [password, onpasswordHandler] = useInput('');
+
+  useEffect(() => {
+    if (logInError) {
+      // eslint-disable-next-line no-alert
+      alert(logInError);
+    }
+  }, [logInError]);
 
   const onSubmitForm = useCallback(() => {
     dispatch(loginRequestAction({ email, password }));

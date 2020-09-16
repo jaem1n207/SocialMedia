@@ -19,17 +19,17 @@ const UserProfile = () => {
         <div key="timeline">
           타임라인
           <br />
-          {me.Posts ? me.Posts.length : 0}
+          {me.Posts.length}
         </div>,
         <div key="followings">
           팔로잉
           <br />
-          {me.Followings ? me.Followings.length : 0}
+          {me.Followings.length}
         </div>,
         <div key="followers">
           팔로워
           <br />
-          {me.Followers ? me.Followers.length : 0}
+          {me.Followers.length}
         </div>,
       ]}
     >
