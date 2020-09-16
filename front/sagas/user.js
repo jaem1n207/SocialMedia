@@ -33,7 +33,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post('/user/logout');
+  return axios.post('/logout');
 }
 
 function* logOut() {
