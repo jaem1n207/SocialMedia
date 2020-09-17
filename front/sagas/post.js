@@ -29,7 +29,7 @@ import {
 } from '../reducers/user';
 
 function followAPI(data) {
-  return axios.get('api/posts', data);
+  return axios.get('/posts', data);
 }
 
 function* follow(action) {
@@ -49,7 +49,7 @@ function* follow(action) {
 }
 
 function unfollowAPI(data) {
-  return axios.get('api/posts', data);
+  return axios.get('/posts', data);
 }
 
 function* unfollow(action) {
@@ -69,7 +69,7 @@ function* unfollow(action) {
 }
 
 function loadPostAPI(data) {
-  return axios.get('api/posts', data);
+  return axios.get('/posts', data);
 }
 
 function* loadPost(action) {
@@ -88,25 +88,20 @@ function* loadPost(action) {
 }
 
 function addPostAPI(postData) {
-  return axios.post('/api/post', postData);
+  return axios.post('/post', { content: postData });
 }
 
 function* addPost(action) {
   try {
-    // const result = yield call(addPostAPI, action.data);
-    yield delay(1000);
-    const id = shortId.generate();
+    const result = yield call(addPostAPI, action.data);
+    console.log('Post result: ', result);
     yield put({
       type: ADD_POST_SUCCESS,
-      data: {
-        id,
-        content: action.data,
-      },
-      // data: result.data,
+      data: result.data,
     });
     yield put({
       type: ADD_POST_TO_ME,
-      data: id,
+      data: result.data.id,
     });
   } catch (err) {
     yield put({
@@ -117,7 +112,7 @@ function* addPost(action) {
 }
 
 function removePostAPI(data) {
-  return axios.delete('/api/post', data);
+  return axios.delete('/post', data);
 }
 
 function* removePost(action) {
@@ -140,7 +135,7 @@ function* removePost(action) {
 }
 
 function addCommentAPI(data) {
-  return axios.post(`/api/post/${id}/comment`, data);
+  return axios.post(`/post/${id}/comment`, data);
 }
 
 function* addComment(action) {

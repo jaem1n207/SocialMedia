@@ -1,12 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { User, Post } = require('../models');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const passport = require('passport');
 
 const router = express.Router();
 
 /* user login */
-router.post('/login', (req, res, next) => {
+router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     // 서버 에러
     if (err) {
@@ -50,14 +51,14 @@ router.post('/login', (req, res, next) => {
 });
 
 /* user logout */
-router.post('/logout', (req, res, next) => {
+router.post('/logout', isLoggedIn, (req, res, next) => {
   req.logout();
   req.session.destroy();
   res.send('ok');
 });
 
 /* user Signup */
-router.post('/', async (req, res, next) => {
+router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
       // 똑같은 email을 가진 user가 없다면 null값 할당
