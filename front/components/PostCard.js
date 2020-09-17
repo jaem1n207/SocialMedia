@@ -90,7 +90,7 @@ const PostCard = ({ post }) => {
       </Card>
       {commentFormOpend && (
         <div>
-          <CommentForm post={post} />
+          {me && <CommentForm post={post} />}
           <List
             css={css`
               background: #ffffff;

@@ -54,7 +54,14 @@ const CommentForm = ({ post }) => {
             flex-shrink: 1;
           `}
         >
-          <Avatar>{me === null ? 'Ja' : me.nickname.substr(0, 2)}</Avatar>
+          <Avatar
+            css={css`
+              background-color: #7265e6;
+            `}
+            gap={1}
+          >
+            {me.nickname.substr(0, 2)}
+          </Avatar>
           <Input.TextArea
             css={css`
               display: flex;
