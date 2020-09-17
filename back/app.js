@@ -25,7 +25,8 @@ passportConfig();
 /* CORS Settings */
 app.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:5000',
+    credentials: true, // post가 다른 browser와 server간의 cookie 전달 true
   })
 );
 app.use(express.json());
