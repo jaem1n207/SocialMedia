@@ -84,14 +84,14 @@ export const addComment = (data) => ({
   Comments: [],
 }); */
 
-const dummyComment = (data) => ({
+/* const dummyComment = (data) => ({
   id: shortId.generate(),
   content: data,
   User: {
     id: 1,
     nickname: 'Jaemin',
   },
-});
+}); */
 
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
@@ -145,8 +145,8 @@ const reducer = (state = initialState, action) =>
         draft.addCommentError = null;
         break;
       case ADD_COMMENT_SUCCESS: {
-        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Comments.unshift(dummyComment(action.data.content));
+        const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.Comments.unshift(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;

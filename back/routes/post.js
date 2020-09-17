@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const { Post } = require('../models');
+const { isLoggedIn } = require('./middlewares');
 
 /* addPostAPI */
-router.post('/', async (req, res) => {
+router.post('/', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.create({
       content: req.body.content,
@@ -17,11 +18,19 @@ router.post('/', async (req, res) => {
 });
 
 /* addPostCommentAPI */
-router.post('/:postId/comment', async (req, res) => {
+router.post('/:postId/comment', isLoggedIn, async (req, res) => {
   try {
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    // post가 존재하지 않다면
+    if (!post) {
+      return res.status(403).send('존재하지 않는 게시글입니다.');
+    }
     const comment = await Comment.create({
       content: req.body.content,
       PostId: req.params.postId,
+      UserId: req.user.id,
     });
     res.status(201).json(comment);
   } catch (error) {
