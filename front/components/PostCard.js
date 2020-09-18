@@ -79,9 +79,13 @@ const PostCard = ({ post }) => {
       >
         <Card.Meta
           avatar={
-            <Avatar>
-              {post.User.nickname[0]}
-              {post.User.nickname[1]}
+            <Avatar
+              css={css`
+                background-color: #ffbf00;
+              `}
+              gap={1}
+            >
+              {post.User.nickname.substr(0, 1)}
             </Avatar>
           }
           title={post.User.nickname}

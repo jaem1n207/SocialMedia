@@ -1,12 +1,22 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Menu, Input, Row, Col, Avatar } from 'antd';
-import React, { useState } from 'react';
+import Router from 'next/router';
+import { Menu, Input, Row, Col, Avatar, Dropdown, Button } from 'antd';
+import React, { useCallback, useState } from 'react';
 import { css, Global } from '@emotion/core';
-import { useSelector } from 'react-redux';
-import { UserOutlined, UserAddOutlined, HomeFilled } from '@ant-design/icons';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  UserOutlined,
+  UserAddOutlined,
+  HomeFilled,
+  DownOutlined,
+  LogoutOutlined,
+  EditOutlined,
+  HomeOutlined,
+} from '@ant-design/icons';
 import media from 'css-in-js-media';
 
+import { logoutRequestAction } from '../reducers/user';
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
 
@@ -16,7 +26,25 @@ import LoginForm from './LoginForm';
 */
 
 const AppLayout = ({ children }) => {
+  const dispatch = useDispatch();
   const { me } = useSelector((state) => state.user);
+
+  const onLogOut = useCallback(() => {
+    dispatch(logoutRequestAction());
+  }, []);
+
+  /* when user profile hover, show dropdown menu list */
+  const menu = (
+    <Menu>
+      <Menu.Item icon={<HomeOutlined />}>타임라인</Menu.Item>
+      <Menu.Item icon={<EditOutlined />}>
+        <Link href="/profile">정보 수정</Link>
+      </Menu.Item>
+      <Menu.Item danger onClick={onLogOut} icon={<LogoutOutlined />}>
+        로그아웃
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <div>
@@ -46,7 +74,8 @@ const AppLayout = ({ children }) => {
         <Menu.Item
           css={css`
             position: relative;
-            right: 32%;
+            right: 35.5%;
+            padding-bottom: 0px;
             ${media('<=largeDesktop', '>desktop')} {
               right: 17%;
             }
@@ -91,6 +120,7 @@ const AppLayout = ({ children }) => {
           css={css`
             position: relative;
             right: 8.5% !important;
+            padding-bottom: 8px !important;
           `}
           icon={<HomeFilled />}
         >
@@ -98,26 +128,28 @@ const AppLayout = ({ children }) => {
             <a>피드</a>
           </Link>
         </Menu.Item>
-        <Menu.Item
-          icon={<UserOutlined />}
-          css={css`
-            position: relative;
-            right: 8.5% !important;
-          `}
-        >
-          <Link href="/profile">
-            <a>내 프로필</a>
-          </Link>
-        </Menu.Item>
 
         {me ? (
-          ''
+          <Dropdown
+            overlay={menu}
+            css={css`
+              position: relative;
+              right: 7.5% !important;
+              padding-bottom: 4.5px !important;
+              color: black;
+            `}
+          >
+            <a title="Profile" key="leftButton" className="ant-dropdown-link">
+              <UserOutlined /> 내 프로필 <DownOutlined />
+            </a>
+          </Dropdown>
         ) : (
           <Menu.Item
             icon={<UserAddOutlined />}
             css={css`
               position: relative;
-              right: 8.5% !important;
+              right: 7.5% !important;
+              padding-bottom: 8px !important;
             `}
           >
             <Link href="/signup">

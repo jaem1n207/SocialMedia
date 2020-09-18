@@ -60,7 +60,7 @@ const CommentForm = ({ post }) => {
             `}
             gap={1}
           >
-            {me.nickname.substr(0, 2)}
+            {me.nickname.substr(0, 1)}
           </Avatar>
           <Input.TextArea
             css={css`

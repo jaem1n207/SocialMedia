@@ -50,7 +50,14 @@ const PostForm = () => {
           width: 100%;
         `}
       >
-        <Avatar>{me.nickname.substr(0, 2)}</Avatar>
+        <Avatar
+          css={css`
+            background-color: #7265e6;
+          `}
+          gap={1}
+        >
+          {me.nickname.substr(0, 1)}
+        </Avatar>
         <Input.TextArea
           css={css`
             resize: none;

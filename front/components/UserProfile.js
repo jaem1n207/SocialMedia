@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Avatar, Card, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { css } from '@emotion/core';
 import { logoutRequestAction } from '../reducers/user';
 
 const { Meta } = Card;
@@ -33,7 +34,19 @@ const UserProfile = () => {
         </div>,
       ]}
     >
-      <Meta avatar={<Avatar>{me.nickname.substr(0, 2)}</Avatar>} title={me.nickname} />
+      <Meta
+        avatar={
+          <Avatar
+            css={css`
+              background-color: #7265e6;
+            `}
+            gap={1}
+          >
+            {me.nickname.substr(0, 1)}
+          </Avatar>
+        }
+        title={me.nickname}
+      />
       <Button onClick={onLogOut} loading={logOutLoading}>
         로그아웃
       </Button>
