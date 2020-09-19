@@ -94,8 +94,8 @@ const AppLayout = ({ children }) => {
             alt="홈페이지 로고"
             src="/static/logo.png"
             css={css`
-              width: 70px;
-              height: 60px;
+              width: 60px;
+              height: 50px;
             `}
           />
           {/*  <Avatar

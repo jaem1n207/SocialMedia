@@ -6,6 +6,22 @@ const passport = require('passport');
 
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const user = await User.findOne({
+        where: { id: req.user.id },
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(200).json(null);
+    }
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+});
+
 /* user login */
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
