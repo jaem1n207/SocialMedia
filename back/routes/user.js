@@ -9,10 +9,31 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     if (req.user) {
-      const user = await User.findOne({
+      const fullUserWithoutPassword = await User.findOne({
         where: { id: req.user.id },
+        // 비밀번호를 제외한 모든 값들을 가져온다.
+        attributes: {
+          exclude: ['password'],
+        },
+        include: [
+          {
+            model: Post,
+            // id만 가져오기
+            attributes: ['id'],
+          },
+          {
+            model: User,
+            as: 'Followings',
+            attributes: ['id'],
+          },
+          {
+            model: User,
+            as: 'Followers',
+            attributes: ['id'],
+          },
+        ],
       });
-      res.status(200).json(user);
+      res.status(200).json(fullUserWithoutPassword);
     } else {
       res.status(200).json(null);
     }
@@ -49,14 +70,17 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         include: [
           {
             model: Post,
+            attributes: ['id'],
           },
           {
             model: User,
             as: 'Followings',
+            attributes: ['id'],
           },
           {
             model: User,
             as: 'Followers',
+            attributes: ['id'],
           },
         ],
       });
