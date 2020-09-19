@@ -38,7 +38,9 @@ const AppLayout = ({ children }) => {
     <Menu>
       <Menu.Item icon={<HomeOutlined />}>타임라인</Menu.Item>
       <Menu.Item icon={<EditOutlined />}>
-        <Link href="/profile">정보 수정</Link>
+        <Link href="/profile">
+          <a>정보 수정</a>
+        </Link>
       </Menu.Item>
       <Menu.Item danger onClick={onLogOut} icon={<LogoutOutlined />}>
         로그아웃

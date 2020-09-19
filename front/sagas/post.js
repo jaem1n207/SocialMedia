@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { all, fork, call, takeLatest, delay, put } from 'redux-saga/effects';
 import axios from 'axios';
-import shortId from 'shortid';
 import {
   ADD_COMMENT_REQUEST,
   ADD_POST_REQUEST,
@@ -12,10 +11,9 @@ import {
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
-  LOAD_POST_REQUEST,
-  LOAD_POST_SUCCESS,
-  generateDummyPost,
-  LOAD_POST_FAILURE,
+  LOAD_POSTS_REQUEST,
+  LOAD_POSTS_SUCCESS,
+  LOAD_POSTS_FAILURE,
 } from '../reducers/post';
 import {
   ADD_POST_TO_ME,
@@ -68,20 +66,21 @@ function* unfollow(action) {
   }
 }
 
-function loadPostAPI(data) {
+function loadPostsAPI(data) {
   return axios.get('/posts', data);
 }
 
-function* loadPost(action) {
+function* loadPosts(action) {
   try {
-    yield delay(1000);
+    const result = yield call(loadPostsAPI, action.data);
+    console.log('posts data: ', result.data);
     yield put({
-      type: LOAD_POST_SUCCESS,
-      data: generateDummyPost(12),
+      type: LOAD_POSTS_SUCCESS,
+      data: result.data,
     });
   } catch (err) {
     yield put({
-      type: LOAD_POST_FAILURE,
+      type: LOAD_POSTS_FAILURE,
       data: err.response.data,
     });
   }
@@ -161,8 +160,8 @@ function* watchUnfollow() {
   yield takeLatest(UNFOLLOW_REQUEST, unfollow);
 }
 
-function* watchLoadPost() {
-  yield takeLatest(LOAD_POST_REQUEST, loadPost);
+function* watchLoadPosts() {
+  yield takeLatest(LOAD_POSTS_REQUEST, loadPosts);
 }
 
 function* watchAddPost() {
@@ -181,7 +180,7 @@ export default function* postSaga() {
   yield all([
     fork(watchFollow),
     fork(watchUnfollow),
-    fork(watchLoadPost),
+    fork(watchLoadPosts),
     fork(watchAddPost),
     fork(watchRemovePost),
     fork(watchAddComment),

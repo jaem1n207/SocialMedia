@@ -4,8 +4,10 @@ const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 const postRouter = require('./routes/post');
+const postsRouter = require('./routes/posts');
 const userRouter = require('./routes/user');
 const db = require('./models');
 const passportConfig = require('./passport');
@@ -21,6 +23,8 @@ db.sequelize
   .catch(console.error);
 
 passportConfig();
+
+app.use(morgan('dev'));
 
 /* CORS Settings */
 app.use(
@@ -47,13 +51,7 @@ app.get('/', (req, res) => {
 });
 
 /* loadPostAPI */
-app.get('/posts', (req, res) => {
-  res.json([
-    { id: 1, content: 'hello' },
-    { id: 2, content: 'hello2' },
-    { id: 3, content: 'hello3' },
-  ]);
-});
+app.use('/posts', postsRouter);
 
 app.use('/post', postRouter);
 
