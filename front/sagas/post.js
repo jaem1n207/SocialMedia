@@ -14,6 +14,12 @@ import {
   LOAD_POSTS_REQUEST,
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_FAILURE,
+  LIKE_POST_REQUEST,
+  UNLIKE_POST_REQUEST,
+  LIKE_POST_FAILURE,
+  LIKE_POST_SUCCESS,
+  UNLIKE_POST_SUCCESS,
+  UNLIKE_POST_FAILURE,
 } from '../reducers/post';
 import {
   ADD_POST_TO_ME,
@@ -25,6 +31,44 @@ import {
   FOLLOW_REQUEST,
   UNFOLLOW_REQUEST,
 } from '../reducers/user';
+
+function likePostAPI(data) {
+  return axios.patch(`/post/${data}/like`); // data: post.id
+}
+
+function* likePost(action) {
+  try {
+    const result = yield call(likePostAPI, action.data);
+    yield put({
+      type: LIKE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LIKE_POST_FAILURE,
+      data: error.response.data,
+    });
+  }
+}
+
+function unLikePostAPI(data) {
+  return axios.delete(`/post/${data}/like`);
+}
+
+function* unLikePost(action) {
+  try {
+    const result = yield call(unLikePostAPI, action.data);
+    yield put({
+      type: UNLIKE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: UNLIKE_POST_FAILURE,
+      data: error.response.data,
+    });
+  }
+}
 
 function followAPI(data) {
   return axios.get('/posts', data);
@@ -158,6 +202,14 @@ function* addComment(action) {
   }
 }
 
+function* watchLikePost() {
+  yield takeLatest(LIKE_POST_REQUEST, likePost);
+}
+
+function* watchUnLikePost() {
+  yield takeLatest(UNLIKE_POST_REQUEST, unLikePost);
+}
+
 function* watchFollow() {
   yield takeLatest(FOLLOW_REQUEST, follow);
 }
@@ -184,6 +236,8 @@ function* watchAddComment() {
 
 export default function* postSaga() {
   yield all([
+    fonk(watchLikePost),
+    fork(watchUnLikePost),
     fork(watchFollow),
     fork(watchUnfollow),
     fork(watchLoadPosts),
