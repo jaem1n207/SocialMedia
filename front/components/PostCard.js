@@ -39,6 +39,7 @@ const PostCard = ({ post }) => {
 
   const { me } = useSelector((state) => state.user);
   const id = me?.id; // optional chaining
+  const liked = post.Likers.find((v) => v.id === id);
 
   /* 천단위마다 콤마를 찍어준다. */
   const numberComma = useCallback((number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','), []);
@@ -144,6 +145,7 @@ PostCard.propTypes = {
     createdAt: PropTypes.string,
     Comments: PropTypes.arrayOf(PropTypes.object),
     Images: PropTypes.arrayOf(PropTypes.object),
+    Likers: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
 
