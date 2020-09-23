@@ -236,7 +236,7 @@ function* watchAddComment() {
 
 export default function* postSaga() {
   yield all([
-    fonk(watchLikePost),
+    fork(watchLikePost),
     fork(watchUnLikePost),
     fork(watchFollow),
     fork(watchUnfollow),
