@@ -116,7 +116,7 @@ const reducer = (state = initialState, action) =>
         draft.likePostError = null;
         break;
       case LIKE_POST_SUCCESS: {
-        // action.data: postId & userId
+        // action.data: PostId & UserId
         const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
         post.Likers.push({ id: action.data.UserId });
         draft.likePostLoading = false;
