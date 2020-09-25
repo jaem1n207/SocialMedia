@@ -179,12 +179,12 @@ const reducer = (state = initialState, action) =>
         break;
       case REMOVE_POST_SUCCESS:
         draft.mainPosts = draft.mainPosts.filter((v) => v.id !== action.data.PostId);
-        draft.removeCommentLoading = false;
-        draft.removeCommentDone = true;
+        draft.removePostLoading = false;
+        draft.removePostDone = true;
         break;
       case REMOVE_POST_FAILURE:
-        draft.removeCommentLoading = false;
-        draft.removeCommentError = action.error;
+        draft.removePostLoading = false;
+        draft.removePostError = action.error;
         break;
       case ADD_COMMENT_REQUEST:
         draft.addCommentLoading = true;
