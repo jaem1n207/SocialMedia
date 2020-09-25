@@ -32,7 +32,7 @@ router.post('/', isLoggedIn, async (req, res) => {
         },
         {
           model: User, // 좋아요 누른 유저
-          as: Likers,
+          as: 'Likers',
           attributes: ['id'],
         },
       ],
@@ -70,11 +70,12 @@ router.post('/:postId/comment', isLoggedIn, async (req, res) => {
     res.status(201).json(fullComment);
   } catch (error) {
     console.error(error);
+    next(error);
   }
 });
 
 /* likePostAPI */
-router.patch('/:postId/like', async (req, res, next) => {
+router.patch('/:postId/like', isLoggedIn, async (req, res, next) => {
   try {
     // 포스트가 있는지 검사
     const post = await Post.findOne({ where: { id: req.params.postId } });
@@ -90,7 +91,7 @@ router.patch('/:postId/like', async (req, res, next) => {
 });
 
 /* unLikePostAPI */
-router.delete('/:postId/like', async (req, res, next) => {
+router.delete('/:postId/like', isLoggedIn, async (req, res, next) => {
   try {
     const post = await Post.findOne({ where: { id: req.params.postId } });
     if (!post) {

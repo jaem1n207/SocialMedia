@@ -43,16 +43,17 @@ function* likePost(action) {
       type: LIKE_POST_SUCCESS,
       data: result.data,
     });
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
     yield put({
       type: LIKE_POST_FAILURE,
-      data: error.response.data,
+      error: err.response.data,
     });
   }
 }
 
 function unLikePostAPI(data) {
-  return axios.delete(`/post/${data}/like`);
+  return axios.delete(`/post/${data}/like`); // data: post.id
 }
 
 function* unLikePost(action) {
@@ -62,10 +63,11 @@ function* unLikePost(action) {
       type: UNLIKE_POST_SUCCESS,
       data: result.data,
     });
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
     yield put({
       type: UNLIKE_POST_FAILURE,
-      data: error.response.data,
+      error: err.response.data,
     });
   }
 }
@@ -119,7 +121,6 @@ function loadPostsAPI(data) {
 function* loadPosts(action) {
   try {
     const result = yield call(loadPostsAPI, action.data);
-    console.log('posts data: ', result.data);
     yield put({
       type: LOAD_POSTS_SUCCESS,
       data: result.data,
