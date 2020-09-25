@@ -17,7 +17,53 @@ import {
   CHANGE_NICKNAME_REQUEST,
   CHANGE_NICKNAME_FAILURE,
   CHANGE_NICKNAME_SUCCESS,
+  FOLLOW_REQUEST,
+  UNFOLLOW_REQUEST,
+  FOLLOW_FAILURE,
+  FOLLOW_SUCCESS,
+  UNFOLLOW_SUCCESS,
+  UNFOLLOW_FAILURE,
 } from '../reducers/user';
+
+function followAPI(data) {
+  return axios.patch(`/user/${data}/follow`);
+}
+
+function* follow(action) {
+  try {
+    const result = yield call(followAPI, action.data);
+    yield put({
+      type: FOLLOW_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: FOLLOW_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function unFollowAPI(data) {
+  return axios.delete(`/user/${data}/follow`);
+}
+
+function* unFollow(action) {
+  try {
+    const result = yield call(unFollowAPI, action.data);
+    yield put({
+      type: UNFOLLOW_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UNFOLLOW_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
 
 function changeNicknameAPI(data) {
   return axios.patch('/user/nickname', { nickname: data });
@@ -50,7 +96,7 @@ function* loadMyInfo(action) {
       data: result.data,
     });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     yield put({
       type: LOAD_MY_INFO_FAILURE,
       error: error.response.data,
@@ -117,6 +163,14 @@ function* signUp(action) {
   }
 }
 
+function* watchFollow() {
+  yield takeLatest(FOLLOW_REQUEST, follow);
+}
+
+function* watchUnFollow() {
+  yield takeLatest(UNFOLLOW_REQUEST, unFollow);
+}
+
 function* watchChangeNickname() {
   yield takeLatest(CHANGE_NICKNAME_REQUEST, changeNickname);
 }
@@ -138,5 +192,13 @@ function* watchSignUp() {
 }
 
 export default function* userSaga() {
-  yield all([fork(watchChangeNickname), fork(watchLoadMyInfo), fork(watchLogin), fork(watchLogOut), fork(watchSignUp)]);
+  yield all([
+    fork(watchFollow),
+    fork(watchUnFollow),
+    fork(watchChangeNickname),
+    fork(watchLoadMyInfo),
+    fork(watchLogin),
+    fork(watchLogOut),
+    fork(watchSignUp),
+  ]);
 }

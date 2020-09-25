@@ -154,7 +154,7 @@ router.patch('/:userId/follow', isLoggedIn, async (req, res, next) => {
       res.status(403).send('존재하지 않는 유저는 팔로우할 수 없습니다.');
     }
     await user.addFollowers(req.user.id);
-    res.status(200).json({ UserId: req.params.userId });
+    res.status(200).json({ UserId: parseInt(req.params.userId, 10) });
   } catch (err) {
     console.error(err);
     next(err);
@@ -173,7 +173,7 @@ router.delete('/:userId/follow', isLoggedIn, async (req, res, next) => {
       res.status(403).send('존재하지 않는 유저는 언팔로우할 수 없습니다.');
     }
     await user.removeFollowers(req.user.id);
-    res.status(200).json({ UserId: req.params.userId });
+    res.status(200).json({ UserId: parseInt(req.params.userId, 10) });
   } catch (err) {
     console.error(err);
     next(err);
