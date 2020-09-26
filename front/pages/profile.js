@@ -6,7 +6,7 @@ import AppLayout from '../components/AppLayout';
 
 import FollowList from '../components/FollowList';
 import NicknameEditForm from '../components/NicknameEditForm';
-import { FOLLOW_REQUEST, LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST } from '../reducers/user';
+import { LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST } from '../reducers/user';
 
 const Profile = () => {
   const dispatch = useDispatch();
