@@ -3,43 +3,59 @@ import PropTypes from 'prop-types';
 import { List, Button, Card } from 'antd';
 import { css } from '@emotion/core';
 import { UserDeleteOutlined } from '@ant-design/icons';
-
-const { Meta } = Card;
+import { useDispatch } from 'react-redux';
+import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
 // eslint-disable-next-line react/prop-types
-const FollowList = ({ header, data }) => (
-  <List
-    css={css`
-      margin-bottom: 20px;
-    `}
-    size="small"
-    grid={{ gutter: 4, xs: 2, md: 3 }}
-    header={<div>{header}</div>}
-    loadMore={
-      <div
-        css={css`
-          text-align: center;
-          margin: 10px 0;
-        `}
-      >
-        <Button>더 보기</Button>
-      </div>
+const FollowList = ({ header, data }) => {
+  const dispatch = useDispatch();
+  const onCancel = (id) => {
+    if (header === '팔로잉') {
+      dispatch({
+        type: UNFOLLOW_REQUEST,
+        data: id,
+      });
     }
-    bordered
-    dataSource={data}
-    renderItem={(item) => (
-      <List.Item
-        css={css`
-          margin-top: 20px;
-        `}
-      >
-        <Card actions={[<UserDeleteOutlined style={{ color: '#e50c14' }} key="delete" />]}>
-          <Meta description={item.nickname} />
-        </Card>
-      </List.Item>
-    )}
-  />
-);
+    dispatch({
+      type: REMOVE_FOLLOWER_REQUEST,
+      data: id,
+    });
+  };
+
+  return (
+    <List
+      css={css`
+        margin-bottom: 20px;
+      `}
+      size="small"
+      grid={{ gutter: 4, xs: 2, md: 3 }}
+      header={<div>{header}</div>}
+      loadMore={
+        <div
+          css={css`
+            text-align: center;
+            margin: 10px 0;
+          `}
+        >
+          <Button>더 보기</Button>
+        </div>
+      }
+      bordered
+      dataSource={data}
+      renderItem={(item) => (
+        <List.Item
+          css={css`
+            margin-top: 20px;
+          `}
+        >
+          <Card actions={[<UserDeleteOutlined key="stop" onClick={onCancel(item.id)} />]}>
+            <Card.Meta description={item.nickname} />
+          </Card>
+        </List.Item>
+      )}
+    />
+  );
+};
 
 FollowList.propType = {
   header: PropTypes.string.isRequired,

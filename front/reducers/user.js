@@ -100,6 +100,20 @@ export const logoutRequestAction = () => ({
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
+      case REMOVE_FOLLOWER_REQUEST:
+        draft.removeFollowerLoading = true;
+        draft.removeFollowerError = null;
+        draft.removeFollowerDone = false;
+        break;
+      case REMOVE_FOLLOWER_SUCCESS:
+        draft.removeFollowerLoading = false;
+        draft.me.Followers = draft.me.Followers.filter((v) => v.id !== action.data.UserId);
+        draft.removeFollowerDone = true;
+        break;
+      case REMOVE_FOLLOWER_FAILURE:
+        draft.removeFollowerLoading = false;
+        draft.removeFollowerError = action.error;
+        break;
       case LOAD_MY_INFO_REQUEST:
         draft.loadMyInfoLoading = true;
         draft.loadMyInfoError = null;
