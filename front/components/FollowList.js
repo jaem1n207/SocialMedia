@@ -9,7 +9,7 @@ import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 // eslint-disable-next-line react/prop-types
 const FollowList = ({ header, data }) => {
   const dispatch = useDispatch();
-  const onCancel = (id) => {
+  const onCancel = (id) => () => {
     if (header === '팔로잉') {
       dispatch({
         type: UNFOLLOW_REQUEST,
