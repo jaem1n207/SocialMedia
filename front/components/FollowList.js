@@ -8,6 +8,7 @@ import { UNFOLLOW_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user';
 
 // eslint-disable-next-line react/prop-types
 const FollowList = ({ header, data }) => {
+  console.log('Follow data: ', data);
   const dispatch = useDispatch();
   const onCancel = (id) => () => {
     if (header === '팔로잉') {
@@ -49,7 +50,7 @@ const FollowList = ({ header, data }) => {
           `}
         >
           <Card actions={[<UserDeleteOutlined key="stop" onClick={onCancel(item.id)} />]}>
-            <Card.Meta description={item.nickname} />
+            <Card.Meta description={item.id} />
           </Card>
         </List.Item>
       )}

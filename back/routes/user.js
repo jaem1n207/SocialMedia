@@ -1,8 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User, Post } = require('../models');
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const passport = require('passport');
+const { User, Post, Image, Comment } = require('../models');
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const router = express.Router();
 
@@ -152,6 +152,7 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
     const followers = await user.getFollowers({
       limit: parseInt(req.query.limit, 10),
     });
+    console.log('followers: ', followers);
     res.status(200).json(followers);
   } catch (error) {
     console.error(error);
@@ -169,6 +170,7 @@ router.get('/followings', isLoggedIn, async (req, res, next) => {
     const followings = await user.getFollowings({
       limit: parseInt(req.query.limit, 10),
     });
+    console.log('followings: ', followings);
     res.status(200).json(followings);
   } catch (error) {
     console.error(error);
