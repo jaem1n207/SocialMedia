@@ -149,8 +149,8 @@ const reducer = (state = initialState, action) =>
         break;
       case UNFOLLOW_SUCCESS:
         draft.unfollowLoading = false;
-        draft.unfollowDone = true;
         draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data.UserId);
+        draft.unfollowDone = true;
         break;
       case UNFOLLOW_FAILURE:
         draft.unfollowLoading = false;
