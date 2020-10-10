@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+
 const { User, Post, Image, Comment } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
@@ -163,6 +164,7 @@ router.get('/followers', isLoggedIn, async (req, res, next) => {
 /* Get Followings List */
 router.get('/followings', isLoggedIn, async (req, res, next) => {
   try {
+    console.log('followings id: ', req.user.id);
     const user = await User.findOne({ where: { id: req.user.id } });
     if (!user) {
       res.status(403).send('존재하지 않는 유저입니다.');

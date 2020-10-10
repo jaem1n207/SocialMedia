@@ -40,16 +40,17 @@ router.post('/', isLoggedIn, async (req, res) => {
     res.status(201).json(fullPost);
   } catch (error) {
     console.error(error);
+    next(error);
   }
 });
 
 /* addPostCommentAPI */
-router.post('/:postId/comment', isLoggedIn, async (req, res) => {
+router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
+  // POST /post/1/comment
   try {
     const post = await Post.findOne({
       where: { id: req.params.postId },
     });
-    // post가 존재하지 않다면
     if (!post) {
       return res.status(403).send('존재하지 않는 게시글입니다.');
     }
@@ -107,13 +108,15 @@ router.delete('/:postId/like', isLoggedIn, async (req, res, next) => {
 
 /* removePostAPI */
 router.delete('/:postId', isLoggedIn, async (req, res, next) => {
+  // DELETE /post/10
   try {
     await Post.destroy({
-      where: { id: req.params.postId, UserId: req.user.id },
+      where: {
+        id: req.params.postId,
+        UserId: req.user.id,
+      },
     });
-    res.status(200).json({
-      PostId: parseInt(req.params.postId, 10),
-    });
+    res.status(200).json({ PostId: parseInt(req.params.postId, 10) });
   } catch (error) {
     console.error(error);
     next(error);
