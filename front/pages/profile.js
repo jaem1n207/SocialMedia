@@ -34,7 +34,7 @@ const Profile = () => {
   return (
     <AppLayout>
       <Head>
-        <title>내 프로필 | Social Media</title>
+        <title>내 프로필! | Social Media</title>
       </Head>
       <NicknameEditForm />
       <FollowList header="팔로잉" data={me.Followings} />
